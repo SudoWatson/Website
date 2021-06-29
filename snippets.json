@@ -1,0 +1,14 @@
+{
+    "html": {
+        "snippets": {
+            "meta:vp": "meta[name=viewport content='width=device-width, initial-scale=1.0']",
+            "css": "link[href='base.css' type='text/css' rel='stylesheet']",
+            "header": "header>a[href=/]>h3>{Austin's<br>RaspbianServer}",
+            "!!": "!!!+html[lang=${lang}]>(head>meta[charset=${charset}]+meta:vp+css+title{${1:Document}})+header+body",
+            "!": "{<%- contentFor('title') %> ${1:Title} <%- contentFor('body') %>\n}",
+            "R!": "{// Require Packages\nconst express = require(\"express\");\nconst router = express.Router();\n\n// Require Models (If any)\n\n// Initialize to getCurrentUser\nlet getCurrentUser;\ninit = getCurrentUserFunc => getCurrentUser = getCurrentUserFunc;\n\n// Routes\nrouter.get(\"${1:/}\", (req, res) => {\n    res.render(\"${2:}\", {user: getCurrentUser(req)\\});\n\\});\n\n// Exports\nmodule.exports = {init, router\\};}",
+            "S!": "{const mongoose = require(\"mongoose\");\n\nconst ${1:collectionName}Schema = new mongoose.Schema({\n    ${2:field1}: {\n        type: ${3:String},\n        required: ${4:false}\n    \\},${5:}\n\\});\n\n//                            Collection   Schema format\nmodule.exports = mongoose.model(\"${1:collectionName}\", ${1:collectionName}Schema);}"
+        }
+    }
+}
+
