@@ -1,0 +1,7 @@
+<%- contentFor('title') %> Add Runnable <%- contentFor('body') %>
+<h1>Add Runnable</h1>
+<form action="/runnables" method="POST" enctype="multipart/form-data">
+	<%- include("runnableFormFields", {editing: false}) %>
+    <a href="/runnables">Cancel</a>
+	<button class="runnables submit" type="submit">Add Runnable</button>
+</form>

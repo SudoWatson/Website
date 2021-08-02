@@ -1,2 +1,13 @@
-<%- contentFor('title') %> Runnables <%- contentFor('body') %>
+<%- contentFor('title') %> Runnables <%- contentFor('links') %>
+<link rel="stylesheet" href="/programs.css" type="text/css" />
+<%- contentFor('body') %>
 <h1>Runnables</h1>
+<% runnables.forEach(runnable => { %>
+<a href="runnables/<%= runnable.fileName %> ">
+    <div class="entry">
+        <h3><%= runnable.title %></h3>
+        <img src=<%= runnable.imagePath %> alt="Cover image for <%= runnable.title %>" height="148" width="148" />
+        <p> <%= runnable.description %> </p>
+    </div>
+</a>
+<% }) %>

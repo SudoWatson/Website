@@ -31,6 +31,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
+const slug = require("slug")
 
 const initPassport = require("./passport-config");
 const tools = require("./tools");

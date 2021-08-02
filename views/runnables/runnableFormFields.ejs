@@ -1,0 +1,35 @@
+<div class="runnables title">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" value="<%= runnable.title %>" required />
+</div>
+<div class="runnables description">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="5" cols="50" required><%= runnable.description %></textarea>
+</div>
+<% if (!editing) { %> 
+    <div class="runnables cover"><label for="cover">Cover Image</label><input type="file" name="cover" required></input></div>
+    <div class="runnables links">
+        <label for="links">Links</label>
+        <input type="text" id="links" name="links" required />
+    </div>
+    <div class="runnables schedule">idek what i'm going to do for the schedule here</div>
+<% } %> 
+<div class="runnables runPath">
+    <label for="runPath">Path to Main File</label>
+    <input type="text" id="runPath" name="runPath" value="<%= runnable.runPath %>" required />
+</div>
+<div class="runnables autoUpdate">
+    <label for="autoUpdate">AutoUpdate on Run?</label>
+    <input type="checkbox" id="autoUpdate" name="autoUpdate" <% if (runnable.autoUpdateOnRun) { %> checked <% } %>/>
+</div>
+<fieldset class="runnables runStyle">
+    <legend class="runnables runStyle">Run Style</legend>
+    <label for="manual">Manual</label>
+    <input type="checkbox" id="manual" name="manual" <% if (runnable.runStyle.includes("manual")) { %> checked <% } %>/>
+    <label for="schedule">Schedule</label>
+    <input type="checkbox" id="schedule" name="schedule" <% if (runnable.runStyle.includes("schedule")) { %> checked <% } %> />
+</fieldset>
+<div class="runnables tags">
+    <label for="tags">Tags</label>
+    <input type="text" id="tags" name="tags" />
+</div>
