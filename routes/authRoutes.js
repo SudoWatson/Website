@@ -2,10 +2,8 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 
+const getCurrentUser = require("../tools.js").getCurrentUser
 const User = require("../models/user.js");
-
-let getCurrentUser;
-init = getCurrentUserFunc => getCurrentUser = getCurrentUserFunc;
 
 router.use(express.urlencoded({extended: false})); // Allows us to access the form data via req.body.formField
 
@@ -47,48 +45,4 @@ router.delete("/logOut", (req, res) => {
 	res.redirect("/")
 })
 
-
-// TODO Place into tools.js
-async function getUser(usernameEmail) {
-	let searchOptions = {};
-	if (usernameEmail.includes('@')) {
-		searchOptions.email = usernameEmail
-	} else {
-		searchOptions.username = usernameEmail
-	}
-
-	try {
-		const user = await User.findOne(searchOptions)
-		return user
-	} catch(e) {
-		console.error("Error in ", __filename);
-		console.log(e)
-	}
-}
-
-// TODO Return user only and have passport-config.js handle the done
-async function getUserByID(ID, done) {
-	return await User.findById( ID, async (err, user) => {
-	  if(err){
-		  return done(null, false, {error:err});
-	  } else {
-		  return done(null, user);
-	  }
-	});
-}
-
-function checkAuth(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next()
-	}
-	res.redirect("/signin")
-}
-
-function checkNotAuth(req, res, next) {
-	if (req.isAuthenticated()) {
-		res.redirect("/account")
-	}
-	next()
-}
-
-module.exports = {init, router, getUser, getUserByID, checkAuth, checkNotAuth};
+module.exports = router;

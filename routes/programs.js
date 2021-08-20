@@ -1,12 +1,9 @@
 // Require Packages
 const express = require("express");
 const router = express.Router();
+const getCurrentUser = require("../tools").getCurrentUser
 
 // Require Models (If any)
-
-// Initialize to getCurrentUser
-let getCurrentUser;
-init = getCurrentUserFunc => getCurrentUser = getCurrentUserFunc;
 
 // Routes
 router.get("/", (req, res) => {
@@ -14,4 +11,4 @@ router.get("/", (req, res) => {
 });
 
 // Exports
-module.exports = {init, router};
+module.exports = router;

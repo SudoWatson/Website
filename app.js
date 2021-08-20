@@ -41,19 +41,14 @@ const programs = require("./routes/programs");
 const runnables = require("./routes/runnables");
 
 // Import sets
-const checkAuth = authen.checkAuth,
-	  checkNotAuth = authen.checkNotAuth;
+const checkAuth = tools.checkAuth,
+	  checkNotAuth = tools.checkNotAuth;
 const getCurrentUser = tools.getCurrentUser;
 
 // Routes
-const authRoutes = authen.router;
-const programsRoute = programs.router;
-const runnablesRoute = runnables.router;
-
-//Route inits
-authen.init(getCurrentUser);
-programs.init(getCurrentUser);
-runnables.init(getCurrentUser);
+const authRoutes = authen;
+const programsRoute = programs;
+const runnablesRoute = runnables;
 
 // Misc. Server Info
 const path = require("path");
@@ -79,7 +74,7 @@ app.use(passport.session());
 app.use(methodOverride("_method")); // Allows us to send DELETE and PUT from forms. _method= in URL overrides the actual form method
 
 // Passport Setup
-initPassport(passport, authen.getUser, authen.getUserByID);
+initPassport(passport, tools.getUser, tools.getUserByID);
 
 // MongoosDB Setup
 mongoose.connect(process.env.DATABASE_URL, {
@@ -99,10 +94,11 @@ app.get("/", (req, res) => {
 app.get("/account", checkAuth, (req, res) => {
 	res.render("account/account.ejs", {user: getCurrentUser(req)});
 });
+app.use("/runnables", runnablesRoute)
 
-app.get("/signup", authRoutes);
+
 app.get("/signin", authRoutes);
-app.post("/signup", authRoutes);
+app.all(["/signUp", "/logOut"], authRoutes);
 app.post(
 	"/signin",
 	passport.authenticate("local", {
@@ -111,9 +107,7 @@ app.post(
 		failureFlash: true,
 	})
 );
-app.delete("/logOut", authRoutes);
 
-app.use("/runnables", runnablesRoute)
 app.use("/programs", programsRoute)
 
 app.listen(port, console.log(`Listening on port ${port}`));
