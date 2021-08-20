@@ -4,16 +4,15 @@ const router = express.Router();
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const bash = require("../tools").bash;
 const slug = require("slug");
 const methodOverride = require("method-override");
+
+const bash = require("../tools").bash;
+const getCurrentUser = require("../tools").getCurrentUser
 
 // Require Models (If any)
 const Runnable = require("../models/runnable");
 
-// Initialize to getCurrentUser
-let getCurrentUser;
-init = (getCurrentUserFunc) => (getCurrentUser = getCurrentUserFunc);
 
 // Other Setup
 const imgExtensionTypes = ["image/jpeg", "image/png"];
@@ -229,4 +228,4 @@ router.delete("/:id", async (req, res) => {
 });
 
 // Exports
-module.exports = {init, router};
+module.exports = router;

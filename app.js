@@ -17,6 +17,15 @@ All runnables begin with a run.py(?)
 If the runnable's schedule time is after the previous recorded time but before the current time, run
 */
 
+/* TODO	Snippets.json
+	https://code.visualstudio.com/docs/editor/userdefinedsnippets
+	Try using LINE_COMMENT for snippet comments
+	Try using TM_FILENAME_BASE for schema name
+	Change snippets to require tools, then set getCurrentUser to tools.etc
+*/
+
+// TODO Add error message partial
+
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
@@ -36,24 +45,15 @@ const slug = require("slug")
 const initPassport = require("./passport-config");
 const tools = require("./tools");
 
-const authen = require("./routes/authRoutes");
-const programs = require("./routes/programs");
-const runnables = require("./routes/runnables");
-
 // Import sets
-const checkAuth = authen.checkAuth,
-	  checkNotAuth = authen.checkNotAuth;
+const checkAuth = tools.checkAuth,
+	  checkNotAuth = tools.checkNotAuth;
 const getCurrentUser = tools.getCurrentUser;
 
 // Routes
-const authRoutes = authen.router;
-const programsRoute = programs.router;
-const runnablesRoute = runnables.router;
-
-//Route inits
-authen.init(getCurrentUser);
-programs.init(getCurrentUser);
-runnables.init(getCurrentUser);
+const accountRoutes = require("./routes/account");
+const programsRoute = require("./routes/programs");
+const runnablesRoute = require("./routes/runnables");
 
 // Misc. Server Info
 const path = require("path");
@@ -79,7 +79,7 @@ app.use(passport.session());
 app.use(methodOverride("_method")); // Allows us to send DELETE and PUT from forms. _method= in URL overrides the actual form method
 
 // Passport Setup
-initPassport(passport, authen.getUser, authen.getUserByID);
+initPassport(passport, tools.getUser, tools.getUserByID);
 
 // MongoosDB Setup
 mongoose.connect(process.env.DATABASE_URL, {
@@ -96,14 +96,12 @@ app.get("/", (req, res) => {
 	res.render("index.ejs", {user: getCurrentUser(req)});
 });
 
-app.get("/account", checkAuth, (req, res) => {
-	res.render("account/account.ejs", {user: getCurrentUser(req)});
-});
+app.use("/runnables", runnablesRoute)
 
-app.get("/signup", authRoutes);
-app.get("/signin", authRoutes);
-app.post("/signup", authRoutes);
-app.post(
+
+app.get("/signin", accountRoutes);
+app.all(["/signUp", "/logOut", "/account"], accountRoutes);
+app.post(	// TODO Redirect to previous URL after sign in
 	"/signin",
 	passport.authenticate("local", {
 		successRedirect: "/",
@@ -111,9 +109,7 @@ app.post(
 		failureFlash: true,
 	})
 );
-app.delete("/logOut", authRoutes);
 
-app.use("/runnables", runnablesRoute)
 app.use("/programs", programsRoute)
 
 app.listen(port, console.log(`Listening on port ${port}`));

@@ -1,6 +1,12 @@
 <%- contentFor('title') %> <%= user.username %> <%- contentFor('body') %>
 
 <h2>Welcome <%= user.username %></h2>
-<form action="/logout?_method=DELETE" method="POST">
+<% if (messages.error) { %>
+	<%= messages.error %>
+<% } %>
+<form id="logout" action="/logout?_method=DELETE" method="POST">
     <button type="submit">Log Out</button>
+</form>
+<form id="deleteAccount" action="/account?_method=DELETE" method="POST">
+    <button type="submit">Delete Account</button>
 </form>
