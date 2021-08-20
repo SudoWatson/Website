@@ -17,6 +17,15 @@ All runnables begin with a run.py(?)
 If the runnable's schedule time is after the previous recorded time but before the current time, run
 */
 
+/* TODO	Snippets.json
+	https://code.visualstudio.com/docs/editor/userdefinedsnippets
+	Try using LINE_COMMENT for snippet comments
+	Try using TM_FILENAME_BASE for schema name
+	Change snippets to require tools, then set getCurrentUser to tools.etc
+*/
+
+// TODO Add error message partial
+
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
@@ -36,19 +45,15 @@ const slug = require("slug")
 const initPassport = require("./passport-config");
 const tools = require("./tools");
 
-const authen = require("./routes/authRoutes");
-const programs = require("./routes/programs");
-const runnables = require("./routes/runnables");
-
 // Import sets
 const checkAuth = tools.checkAuth,
 	  checkNotAuth = tools.checkNotAuth;
 const getCurrentUser = tools.getCurrentUser;
 
 // Routes
-const authRoutes = authen;
-const programsRoute = programs;
-const runnablesRoute = runnables;
+const accountRoutes = require("./routes/account");
+const programsRoute = require("./routes/programs");
+const runnablesRoute = require("./routes/runnables");
 
 // Misc. Server Info
 const path = require("path");
@@ -91,15 +96,12 @@ app.get("/", (req, res) => {
 	res.render("index.ejs", {user: getCurrentUser(req)});
 });
 
-app.get("/account", checkAuth, (req, res) => {
-	res.render("account/account.ejs", {user: getCurrentUser(req)});
-});
 app.use("/runnables", runnablesRoute)
 
 
-app.get("/signin", authRoutes);
-app.all(["/signUp", "/logOut"], authRoutes);
-app.post(
+app.get("/signin", accountRoutes);
+app.all(["/signUp", "/logOut", "/account"], accountRoutes);
+app.post(	// TODO Redirect to previous URL after sign in
 	"/signin",
 	passport.authenticate("local", {
 		successRedirect: "/",

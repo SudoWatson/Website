@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn
 
 const User = require("./models/user.js")
 
-function getCurrentUser(req) {
+function getCurrentUser(req) {  // Sets information about the user in the req field to be used
 	if (req.user === undefined) {
 		return undefined
 	}
@@ -17,7 +17,7 @@ function bash(command, callback) {
 	exec(command, callback)
 }
 
-async function getUser(usernameEmail) {
+async function getUser(usernameEmail) {  // Returns User object from given Username or Email
 	let searchOptions = {};
 	if (usernameEmail.includes('@')) {
 		searchOptions.email = usernameEmail
@@ -28,9 +28,8 @@ async function getUser(usernameEmail) {
 	try {
 		const user = await User.findOne(searchOptions)
 		return user
-	} catch(e) {
-		console.error("Error in ", __filename);
-		console.log(e)
+	} catch(e) {  // No user found
+		return null;
 	}
 }
 
