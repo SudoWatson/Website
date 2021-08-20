@@ -27,8 +27,7 @@ async function init(passport, getUserByEmail, getUserByID) {
         return done(null, user._id);
     });
 	passport.deserializeUser(async (id, done) => {
-        const userID = await getUserByID(id, done)
-        done(null, userID)
+        return await getUserByID(id, done)
     });
 }
 

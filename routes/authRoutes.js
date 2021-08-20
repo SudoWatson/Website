@@ -47,6 +47,8 @@ router.delete("/logOut", (req, res) => {
 	res.redirect("/")
 })
 
+
+// TODO Place into tools.js
 async function getUser(usernameEmail) {
 	let searchOptions = {};
 	if (usernameEmail.includes('@')) {
@@ -64,6 +66,7 @@ async function getUser(usernameEmail) {
 	}
 }
 
+// TODO Return user only and have passport-config.js handle the done
 async function getUserByID(ID, done) {
 	return await User.findById( ID, async (err, user) => {
 	  if(err){
