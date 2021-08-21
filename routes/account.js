@@ -18,10 +18,8 @@ router.get("/account", checkAuth, (req, res) => {
 
 // TODO Confirm account deletion
 router.delete("/account", checkAuth, async (req, res) => {
-	// TODO Delete account
 	try {
 		user = await tools.getUser(req.user.email)
-		console.log(user)
 		await user.remove()
 		req.logout()
 		res.redirect("/")
@@ -38,7 +36,7 @@ router.delete("/account", checkAuth, async (req, res) => {
 	}
 })
 
-router.get("/signin", (req, res) => {
+router.get("/signIn", (req, res) => {
 	res.render("account/login.ejs", {user: getCurrentUser(req)});
 });
 

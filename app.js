@@ -17,8 +17,9 @@ All runnables begin with a run.py(?)
 If the runnable's schedule time is after the previous recorded time but before the current time, run
 */
 
-/* TODO	Snippets.json
+/* TODO	Properly create snippets
 	https://code.visualstudio.com/docs/editor/userdefinedsnippets
+	Properly create extra snippets
 	Try using LINE_COMMENT for snippet comments
 	Try using TM_FILENAME_BASE for schema name
 	Change snippets to require tools, then set getCurrentUser to tools.etc
@@ -98,14 +99,13 @@ app.get("/", (req, res) => {
 
 app.use("/runnables", runnablesRoute)
 
-
-app.get("/signin", accountRoutes);
+app.get("/signIn", accountRoutes);
 app.all(["/signUp", "/logOut", "/account"], accountRoutes);
 app.post(	// TODO Redirect to previous URL after sign in
-	"/signin",
+	"/signIn",
 	passport.authenticate("local", {
 		successRedirect: "/",
-		failureRedirect: "/signin",
+		failureRedirect: "/signIn",
 		failureFlash: true,
 	})
 );

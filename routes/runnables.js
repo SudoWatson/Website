@@ -28,7 +28,7 @@ const upload = multer({
 router.use(methodOverride("_method"))
 
 // Routes
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {  // View all runnables
 	try {
 		const runnables = await Runnable.find({});
 		res.render("runnables/runnables.ejs", {
@@ -38,13 +38,20 @@ router.get("/", async (req, res) => {
 	} catch (e) {}
 });
 
-router.post("/", upload.single("cover"), async (req, res) => {
+router.post("/", upload.single("cover"), async (req, res) => {  // Add runnable
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");
 	if (formData.schedule) runStyle.push("schedule");
 
-	const fileName = slug(formData.title);
+
+	let fileName = slug(formData.title);
+	let i = 0
+	while (fs.existsSync(`./runnables/${fileName}`)) {  // Relative to path of app.js, likely because that's where the console working directory is
+		i++;
+		fileName = slug(formData.title);
+		fileName = fileName + i.toString()
+	}
 	const coverName = req.file != null ? req.file.filename : null;
 
 	// Test of the Link system
@@ -110,7 +117,8 @@ router.get("/new", (req, res) => {
 });
 
 // Methods for Individual Runnables
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {  // Runnable page
+	console.log(req.params.id)
 	try {
 		const runnable = await Runnable.findOne({fileName: req.params.id})
 		res.render("runnables/runnable.ejs",{
@@ -122,7 +130,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", async (req, res) => {  // Edit page for runnable
 	try {
 		const runnable = await Runnable.findOne({fileName: req.params.id})
 		res.render("runnables/editRunnable.ejs",{
@@ -134,7 +142,7 @@ router.get("/:id/edit", async (req, res) => {
 	}
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {  // Update runnable
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");
@@ -157,6 +165,7 @@ router.put("/:id", async (req, res) => {
 
 	try {
 		runnable = await Runnable.findOne({fileName: req.params.id})
+		console.log(runnable)
 		runnable.title = req.body.title;
 		runnable.description = formData.description;
 		runnable.runPath = formData.runPath;
@@ -188,13 +197,19 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {  // Delete runnable
 	const formData = req.body;
 	let runnable;
 
 	try {
 		runnable = await Runnable.findOne({fileName: req.params.id})
-		await runnable.remove();
+		try {
+			await runnable.remove();
+		} catch {
+			if (runnable == null) {  // Runnable doesn't exist
+				return res.redirect("/runnables")
+			}
+		}
 		bash(
 			`bash rm.bash runnables/${runnable.fileName}`,
 			function (err, stdout, stderr) {
@@ -209,7 +224,7 @@ router.delete("/:id", async (req, res) => {
 		fs.unlink(path.join(uploadPath, runnable.imageName), (e2) => {
 			if (e2) {
 				console.error("Error deleting runnable cover");
-				consol.error(e2);
+				console.error(e2);
 			}
 		});
 
