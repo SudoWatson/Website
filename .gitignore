@@ -107,3 +107,6 @@ public/runnableCovers
 /runnables
 
 requests.rest
+
+./public//css*.css
+./public/css/*.css.map
