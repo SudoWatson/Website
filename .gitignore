@@ -108,5 +108,5 @@ public/runnableCovers
 
 requests.rest
 
-./public//css*.css
-./public/css/*.css.map
+/public/css/*.css
+/public/css/*.css.map
