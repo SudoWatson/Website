@@ -27,6 +27,8 @@ If the runnable's schedule time is after the previous recorded time but before t
 
 // TODO Add error message partial
 
+// TODO Use /** for function summaries */
+
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }

@@ -7,17 +7,17 @@
     <textarea id="description" name="description" rows="5" cols="50" required><%= runnable.description %></textarea>
 </div>
 <% if (!editing) { %> 
-    <div class="runnables cover"><label for="cover">Cover Image</label><input type="file" name="cover" required></input></div>
+    <div class="runnables cover">
+        <label for="cover">Cover Image</label>
+        <input type="file" name="cover" onchange="previewFile()" required></input>
+        <img src="/images/noImg.jpg" height="200" alt="Program thumbnail">
+    </div>
     <div class="runnables links">
         <label for="links">Links</label>
         <input type="text" id="links" name="links" required />
     </div>
     <div class="runnables schedule">idek what i'm going to do for the schedule here</div>
-<% } %> 
-<div class="runnables runPath">
-    <label for="runPath">Path to Main File</label>
-    <input type="text" id="runPath" name="runPath" value="<%= runnable.runPath %>" required />
-</div>
+<% } %>
 <div class="runnables autoUpdate">
     <label for="autoUpdate">AutoUpdate on Run?</label>
     <input type="checkbox" id="autoUpdate" name="autoUpdate" <% if (runnable.autoUpdateOnRun) { %> checked <% } %>/>
@@ -31,6 +31,8 @@
 </fieldset>
 <div class="runnables tags">
     <label for="tags">Tags</label>
-    <input type="text" id="tags" name="tags" onkeyup="return addTag(event)"/>
+    <div class="tagField">
+        <textarea name="tag-input" id="tag-input" cols="30" rows="1" onkeyup="return addTag(event)"></textarea>
+        <input hidden type="text" id="tags" name="tags"/>
+    </div>
 </div>
-<script type="text/javascript" src="/runnable.js"></script>

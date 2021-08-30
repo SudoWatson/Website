@@ -1,0 +1,41 @@
+div.entry {
+  border: 3px solid #CE5937;
+  width: 100%;
+}
+
+.entry > h3 {
+  color: white;
+}
+
+.tagField {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: white;
+  border-width: 2px;
+  border-style: inset;
+  border-color: -internal-light-dark(#767676, #858585);
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.tagField textarea {
+  background: none;
+  border: none;
+  margin: 0px 4px;
+}
+
+.tagField span {
+  background-color: rgba(0, 0, 255, 0.5);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 3px;
+  padding: 0px 2px;
+  margin: 0px 2px;
+}
+
+.runPath input {
+  overflow: scroll;
+}
+/*# sourceMappingURL=programs.css.map */

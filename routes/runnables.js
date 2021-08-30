@@ -26,7 +26,6 @@ const upload = multer({
 
 // Uses
 router.use(methodOverride("_method"))
-
 // Routes
 router.get("/", async (req, res) => {  // View all runnables
 	try {
@@ -39,6 +38,7 @@ router.get("/", async (req, res) => {  // View all runnables
 });
 
 router.post("/", upload.single("cover"), async (req, res) => {  // Add runnable
+	console.log(req.body)
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");

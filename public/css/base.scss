@@ -28,10 +28,12 @@ a#accountTitle {
     color: whitesmoke;
 }
 
-button.register {
-    background-color: grey;
-}
+button{
+    .register {
+        background-color: grey;
+    }
 
-button.signIn {
-    background-color: grey;
+    .signIn {
+        background-color: grey;
+    }
 }
