@@ -110,3 +110,6 @@ requests.rest
 
 /public/css/*.css
 /public/css/*.css.map
+
+.vscode
+.VSCodeCounter
