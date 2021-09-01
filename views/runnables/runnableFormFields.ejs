@@ -14,10 +14,17 @@
     </div>
     <div class="runnables links">
         <label for="links">Links</label>
-        <input type="text" id="links" name="links" required />
+        <input type="text" id="links" name="links" autocomplete="off" required />
     </div>
-    <div class="runnables schedule">idek what i'm going to do for the schedule here</div>
 <% } %>
+<div class="runnables schedule">
+    <label for="schedule">Schedule (Cron syntax)</label>
+    <input type="text" id="schedule" name="schedule" autocomplete="off" required />
+</div>
+<div class="runnables mainPath">
+    <label for="mainPath">Main File</label>
+    <input type="text" id="mainPath" name="mainPath" autocomplete="off" required />
+</div>
 <div class="runnables autoUpdate">
     <label for="autoUpdate">AutoUpdate on Run?</label>
     <input type="checkbox" id="autoUpdate" name="autoUpdate" <% if (runnable.autoUpdateOnRun) { %> checked <% } %>/>
@@ -26,13 +33,13 @@
     <legend class="runnables runStyle">Run Style</legend>
     <label for="manual">Manual</label>
     <input type="checkbox" id="manual" name="manual" <% if (runnable.runStyle.includes("manual")) { %> checked <% } %>/>
-    <label for="schedule">Schedule</label>
-    <input type="checkbox" id="schedule" name="schedule" <% if (runnable.runStyle.includes("schedule")) { %> checked <% } %> />
+    <label for="runSchedule">Schedule</label>
+    <input type="checkbox" id="runSchedule" name="runSchedule" <% if (runnable.runStyle.includes("schedule")) { %> checked <% } %> />
 </fieldset>
 <div class="runnables tags">
     <label for="tags">Tags</label>
     <div class="tagField">
-        <input type="text" id="new-tag" name="new-tag" onkeyup="return addTag(event)"/>
+        <input type="text" id="new-tag" name="new-tag" autocomplete="off" onkeyup="return addTag(event)"/>
         <input hidden type="text" id="tags" name="tags"/>
     </div>
 </div>

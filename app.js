@@ -29,11 +29,15 @@ If the runnable's schedule time is after the previous recorded time but before t
 
 // TODO Use /** for function summaries */
 
+// TODO Switch to TypeScript
+
+// TODO Switch to imports
+
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
 
-// Modules
+// Imports
 const express = require("express");
 const fs = require("fs"); // File handler
 const mongoose = require("mongoose");

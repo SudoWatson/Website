@@ -6,8 +6,10 @@ const fs = require("fs");
 const path = require("path");
 const slug = require("slug");
 const methodOverride = require("method-override");
+const cron = require("node-cron")
 
 const bash = require("../tools").bash;
+const bashback = require("../tools").bashback;
 const getCurrentUser = require("../tools").getCurrentUser
 
 // Require Models (If any)
@@ -37,14 +39,14 @@ router.get("/", async (req, res) => {  // View all runnables
 	} catch (e) {}
 });
 
-router.post("/", upload.single("cover"), async (req, res) => {  // Add runnable
-	console.log(req.body)
+/** Add Runnable */
+router.post("/", upload.single("cover"), async (req, res) => {
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");
-	if (formData.schedule) runStyle.push("schedule");
+	if (formData.runSchedule) runStyle.push("schedule");
 
-
+	// Create cover image name
 	let fileName = slug(formData.title);
 	let i = 0
 	while (fs.existsSync(`./runnables/${fileName}`)) {  // Relative to path of app.js, likely because that's where the console working directory is
@@ -66,32 +68,42 @@ router.post("/", upload.single("cover"), async (req, res) => {  // Add runnable
 
 	linkData = {[linkName]: formData.links};
 	// End Link system
-
 	const runnable = new Runnable({
 		title: formData.title,
 		fileName: fileName,
 		description: formData.description,
 		imageName: coverName,
 		links: linkData,
-		schedule: null,
+		schedule: formData.schedule,
 		autoUpdateOnRun: formData.autoUpdate === "on",
-		runPath: formData.runPath,
+		main: formData.mainPath,
 		runStyle: runStyle,
 		tags: formData.tags.split(/\s+/),
 	});
-
+	
 	try {
 		const newRunnable = await runnable.save();
-		bash(
-			`bash getRunnable.bash ${runnable.links["github"]} ${runnable.fileName}`,
-			function (err, stdout, stderr) {
-				if (err) {
-					console.error(stderr);
-				} else {
-					console.log(stdout);
-				}
+		if (runnable.links["github"] !== undefined) {
+			/*
+				TODO Get Git Pull to work
+				Check out https://radek.io/2015/10/27/nodegit/
+				Use nodegit to run the process. Should be an authentication section
+				Hopefully can use username and auth key (stored in .env on DESKTOP)
+				to authenticate
+			*/
+			bash(  
+				`bash getRunnable.bash ${runnable.links["github"]} ${runnable.fileName}`,
+				bashback
+			);
+			if (runnable.runStyle.includes("schedule")) {
+				console.log(`Creating cron schedule: ${runnable.schedule}`)
+				cron.schedule(runnable.schedule, function() {
+					console.log("Executing command -----")
+					bash(`bash run.bash ${runnable.fileName} ${runnable.main}`)
+				})
 			}
-		);
+		}
+		
 
 		res.redirect(`/runnables/${runnable.fileName}`);
 	} catch (e) {
@@ -118,7 +130,6 @@ router.get("/new", (req, res) => {
 
 // Methods for Individual Runnables
 router.get("/:id", async (req, res) => {  // Runnable page
-	console.log(req.params.id)
 	try {
 		const runnable = await Runnable.findOne({fileName: req.params.id})
 		res.render("runnables/runnable.ejs",{
@@ -168,8 +179,9 @@ router.put("/:id", async (req, res) => {  // Update runnable
 		console.log(runnable)
 		runnable.title = req.body.title;
 		runnable.description = formData.description;
-		runnable.runPath = formData.runPath;
+		runnable.main = formData.main;
 		runnable.autoUpdateOnRun = formData.autoUpdate === "on";
+		runnable.schedule = formData.schedule;
 		runnable.runStyle = runStyle
 		await runnable.save();
 		bash(

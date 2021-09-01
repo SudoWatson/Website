@@ -32,7 +32,7 @@ const runnablesSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    runPath: {
+    main: {
         type: String,
         required: true
     },

@@ -1,12 +1,14 @@
 // Require Packages
 const express = require("express");
 const router = express.Router();
-const getCurrentUser = require("../tools").getCurrentUser
+const tools = require("../tools")
+
+const getCurrentUser = tools.getCurrentUser
 
 // Require Models (If any)
 
 // Routes
-router.get("/", (req, res) => {
+router.get("/", (req, res) => { 
     res.render("programs/programs.ejs", {user: getCurrentUser(req)});
 });
 

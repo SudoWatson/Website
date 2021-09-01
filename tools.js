@@ -18,6 +18,14 @@ function bash(command, callback) {
 	exec(command, callback);
 }
 
+function bashback(err, stdout, stderr) {
+	if (err) {
+		console.error(stderr);
+	} else {
+		console.log(stdout);
+	}
+}
+
 async function getUser(usernameEmail) {
 	// Returns User object from given Username or Email
 	let searchOptions = {};
@@ -64,6 +72,7 @@ function checkNotAuth(req, res, next) {
 module.exports = {
 	getCurrentUser,
 	bash,
+	bashback,
 	getUserByID,
 	getUser,
 	checkAuth,
