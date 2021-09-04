@@ -1,16 +1,14 @@
 // Require Packages
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+const multer = require("multer");const exec = require("child_process").exec;
 const fs = require("fs");
 const path = require("path");
 const slug = require("slug");
 const methodOverride = require("method-override");
-const cron = require("node-cron")
+const cron = require("node-cron");
 
-const bash = require("../tools").bash;
-const bashback = require("../tools").bashback;
-const getCurrentUser = require("../tools").getCurrentUser
+const {bash, bashback, getCurrentUser, cloneGit, runPython} = require("../tools")
 
 // Require Models (If any)
 const Runnable = require("../models/runnable");
@@ -27,7 +25,7 @@ const upload = multer({
 });
 
 // Uses
-router.use(methodOverride("_method"))
+router.use(methodOverride("_method"));
 // Routes
 router.get("/", async (req, res) => {  // View all runnables
 	try {
@@ -52,7 +50,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 	while (fs.existsSync(`./runnables/${fileName}`)) {  // Relative to path of app.js, likely because that's where the console working directory is
 		i++;
 		fileName = slug(formData.title);
-		fileName = fileName + i.toString()
+		fileName = fileName + i.toString();
 	}
 	const coverName = req.file != null ? req.file.filename : null;
 
@@ -83,24 +81,20 @@ router.post("/", upload.single("cover"), async (req, res) => {
 	
 	try {
 		const newRunnable = await runnable.save();
+
+		// Clone repo from Git, set Schedule if needed
 		if (runnable.links["github"] !== undefined) {
-			/*
-				TODO Get Git Pull to work
-				Check out https://radek.io/2015/10/27/nodegit/
-				Use nodegit to run the process. Should be an authentication section
-				Hopefully can use username and auth key (stored in .env on DESKTOP)
-				to authenticate
-			*/
-			bash(  
-				`bash getRunnable.bash ${runnable.links["github"]} ${runnable.fileName}`,
-				bashback
-			);
+			cloneGit(runnable.links["github"], runnable.fileName, () => {
+				console.log("Creating venv")
+				// bash(`newVenv.bash ${runnable.fileName}`, bashback)
+				exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
+			})
+
 			if (runnable.runStyle.includes("schedule")) {
 				console.log(`Creating cron schedule: ${runnable.schedule}`)
 				cron.schedule(runnable.schedule, function() {
 					console.log("Executing command -----")
-					bash(`bash run.bash ${runnable.fileName} ${runnable.main}`)
-				})
+				});
 			}
 		}
 		
@@ -223,7 +217,7 @@ router.delete("/:id", async (req, res) => {  // Delete runnable
 			}
 		}
 		bash(
-			`bash rm.bash runnables/${runnable.fileName}`,
+			`rm.bash runnables/${runnable.fileName}`,
 			function (err, stdout, stderr) {
 				if (err) {
 					console.error(stderr);
