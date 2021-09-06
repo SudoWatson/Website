@@ -2,7 +2,9 @@ const exec = require("child_process").exec;
 const {spawn} = require('child_process');
 const loadenv = require("dotenv");
 const nodegit = require("nodegit");
-const path = require("path")
+const path = require("path");
+const fs = require('fs');
+
 
 const User = require("./models/user.js");
 
@@ -29,10 +31,11 @@ function getCurrentUser(req) {
 /**
  * Runs a bash command
  * @param {string} command 
- * @param {Function} callback 
+ * @param {Function} callback
+ * @returns child_process.exec
  */
 function bash(command, callback) {
-	exec(("bash ./bash/ " + command), callback);
+	return exec(("bash ./bash/ " + command), callback);
 }
 
 /**
@@ -130,6 +133,16 @@ function runPython(script, params={}) {
 	spawn("python", [...script, ...params])
 }
 
+/**
+ * Removes the directory of the included runnable
+ * @param {String} runnable 
+ */
+async function rmRunnable(runnable) {
+	fs.rmdir(runnable, {recursive: true}, () => {
+		console.error(`Error removing runnable directory ${runnable}`)
+	})
+}
+
 module.exports = {
 	getCurrentUser,
 	bash,
@@ -139,4 +152,5 @@ module.exports = {
 	checkAuth,
 	checkNotAuth,
 	cloneGit,
+	rmRunnable,
 };

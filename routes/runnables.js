@@ -8,7 +8,7 @@ const slug = require("slug");
 const methodOverride = require("method-override");
 const cron = require("node-cron");
 
-const {bash, bashback, getCurrentUser, cloneGit, runPython} = require("../tools")
+const {bash, bashback, getCurrentUser, cloneGit, runPython, rmRunnable} = require("../tools")
 
 // Require Models (If any)
 const Runnable = require("../models/runnable");
@@ -76,7 +76,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 		autoUpdateOnRun: formData.autoUpdate === "on",
 		main: formData.mainPath,
 		runStyle: runStyle,
-		tags: formData.tags.split(/\s+/),
+		tags: formData.tags.split(/\s+/)
 	});
 	
 	try {
@@ -85,17 +85,18 @@ router.post("/", upload.single("cover"), async (req, res) => {
 		// Clone repo from Git, set Schedule if needed
 		if (runnable.links["github"] !== undefined) {
 			cloneGit(runnable.links["github"], runnable.fileName, () => {
-				console.log("Creating venv")
-				// bash(`newVenv.bash ${runnable.fileName}`, bashback)
-				exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
+				const newVenv = exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
+				newVenv.on("close", () => {
+					if (runnable.runStyle.includes("schedule")) {
+						console.log(`Creating cron schedule: ${runnable.schedule}`)
+						cron.schedule(runnable.schedule, function() {
+							console.log("Executing command -----")
+						});
+					}
+				})
 			})
 
-			if (runnable.runStyle.includes("schedule")) {
-				console.log(`Creating cron schedule: ${runnable.schedule}`)
-				cron.schedule(runnable.schedule, function() {
-					console.log("Executing command -----")
-				});
-			}
+			
 		}
 		
 
@@ -111,6 +112,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 				}
 			});
 		}
+		rmRunnable(runnable.fileName)
 		res.render("/runnables/new");
 	}
 });
@@ -216,17 +218,8 @@ router.delete("/:id", async (req, res) => {  // Delete runnable
 				return res.redirect("/runnables")
 			}
 		}
-		bash(
-			`rm.bash runnables/${runnable.fileName}`,
-			function (err, stdout, stderr) {
-				if (err) {
-					console.error(stderr);
-				} else {
-					console.log(stdout);
-				}
-			}
-		);
 
+		rmRunnable(runnable.fileName)
 		fs.unlink(path.join(uploadPath, runnable.imageName), (e2) => {
 			if (e2) {
 				console.error("Error deleting runnable cover");

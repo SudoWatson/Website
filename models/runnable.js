@@ -43,6 +43,10 @@ const runnablesSchema = new mongoose.Schema({
     tags: {
         type: Array,
         required: false
+    },
+    roleAccess: {
+        type: Array,
+        require: false
     }
 });
 
