@@ -138,8 +138,11 @@ function runPython(script, params={}) {
  * @param {String} runnable 
  */
 async function rmRunnable(runnable) {
-	fs.rmdir(runnable, {recursive: true}, () => {
-		console.error(`Error removing runnable directory ${runnable}`)
+	fs.rmdir(path.join("./runnables", runnable), {recursive: true}, (err) => {
+		if (err) {
+			console.error(`Error removing runnable directory ${runnable}`)
+			console.error(err)
+		}
 	})
 }
 

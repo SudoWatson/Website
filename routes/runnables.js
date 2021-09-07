@@ -10,6 +10,7 @@ const cron = require("node-cron");
 
 const {bash, bashback, getCurrentUser, cloneGit, runPython, rmRunnable} = require("../tools")
 
+
 // Require Models (If any)
 const Runnable = require("../models/runnable");
 
@@ -26,6 +27,7 @@ const upload = multer({
 
 // Uses
 router.use(methodOverride("_method"));
+
 // Routes
 router.get("/", async (req, res) => {  // View all runnables
 	try {
@@ -37,7 +39,7 @@ router.get("/", async (req, res) => {  // View all runnables
 	} catch (e) {}
 });
 
-/** Add Runnable */
+/** Add New Runnable Program */
 router.post("/", upload.single("cover"), async (req, res) => {
 	const formData = req.body;
 	let runStyle = [];
@@ -55,6 +57,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 	const coverName = req.file != null ? req.file.filename : null;
 
 	// Test of the Link system
+	// TODO going to have to change
 	let links = {};
 	linkName = formData.links.replace("https://", "").slice(0, -4); // Removes 'https://' as well as potential '.git'
 	linkName = linkName.split(".");
@@ -66,6 +69,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 
 	linkData = {[linkName]: formData.links};
 	// End Link system
+
 	const runnable = new Runnable({
 		title: formData.title,
 		fileName: fileName,
@@ -79,21 +83,31 @@ router.post("/", upload.single("cover"), async (req, res) => {
 		tags: formData.tags.split(/\s+/)
 	});
 	
-	try {
+	try {  // Adding runnable
 		const newRunnable = await runnable.save();
 
 		// Clone repo from Git, set Schedule if needed
 		if (runnable.links["github"] !== undefined) {
 			cloneGit(runnable.links["github"], runnable.fileName, () => {
-				const newVenv = exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
+				const newVenv = exec((`batch\\newVenv.bat ${runnable.fileName}`), bashback);
 				newVenv.on("close", () => {
 					if (runnable.runStyle.includes("schedule")) {
 						console.log(`Creating cron schedule: ${runnable.schedule}`)
 						cron.schedule(runnable.schedule, function() {
 							console.log("Executing command -----")
+							const runProg = exec((`batch\\run.bat ${runnable.fileName} ${runnable.main}`), bashback);
 						});
 					}
 				})
+				// const newVenv = exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
+				// newVenv.on("close", () => {
+				// 	if (runnable.runStyle.includes("schedule")) {
+				// 		console.log(`Creating cron schedule: ${runnable.schedule}`)
+				// 		cron.schedule(runnable.schedule, function() {
+				// 			console.log("Executing command -----")
+				// 		});
+				// 	}
+				// })
 			})
 
 			
