@@ -50,12 +50,9 @@ const methodOverride = require("method-override");
 const slug = require("slug")
 
 const initPassport = require("./passport-config");
-const tools = require("./tools");
-
+const scheduleManager = require("./scheduleManagement")
 // Import sets
-const checkAuth = tools.checkAuth,
-	  checkNotAuth = tools.checkNotAuth;
-const getCurrentUser = tools.getCurrentUser;
+const {checkAuth, checkNotAuth, getCurrentUser, getUser, getUserByID} = require("./tools")
 
 // Routes
 const accountRoutes = require("./routes/account");
@@ -86,7 +83,7 @@ app.use(passport.session());
 app.use(methodOverride("_method")); // Allows us to send DELETE and PUT from forms. _method= in URL overrides the actual form method
 
 // Passport Setup
-initPassport(passport, tools.getUser, tools.getUserByID);
+initPassport(passport, getUser, getUserByID);
 
 // MongoosDB Setup
 mongoose.connect(process.env.DATABASE_URL, {
@@ -96,6 +93,10 @@ mongoose.connect(process.env.DATABASE_URL, {
 let db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
+
+
+scheduleManager.scheduleRunnables();
+
 
 // ----============= SERVER REQUESTS GO THROUGH HERE =============----
 app.get("/", (req, res) => {

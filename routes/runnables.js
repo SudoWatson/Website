@@ -6,10 +6,9 @@ const fs = require("fs");
 const path = require("path");
 const slug = require("slug");
 const methodOverride = require("method-override");
-const cron = require("node-cron");
 
 const {bash, bashback, getCurrentUser, cloneGit, runPython, rmRunnable} = require("../tools")
-
+const {scheduleRunnable, unscheduleRunnable} = require("../scheduleManagement")
 
 // Require Models (If any)
 const Runnable = require("../models/runnable");
@@ -92,22 +91,9 @@ router.post("/", upload.single("cover"), async (req, res) => {
 				const newVenv = exec((`batch\\newVenv.bat ${runnable.fileName}`), bashback);
 				newVenv.on("close", () => {
 					if (runnable.runStyle.includes("schedule")) {
-						console.log(`Creating cron schedule: ${runnable.schedule}`)
-						cron.schedule(runnable.schedule, function() {
-							console.log("Executing command -----")
-							const runProg = exec((`batch\\run.bat ${runnable.fileName} ${runnable.main}`), bashback);
-						});
+						scheduleRunnable(runnable)
 					}
 				})
-				// const newVenv = exec((`bash ./bash/newVenv.bash ${runnable.fileName}`), bashback);
-				// newVenv.on("close", () => {
-				// 	if (runnable.runStyle.includes("schedule")) {
-				// 		console.log(`Creating cron schedule: ${runnable.schedule}`)
-				// 		cron.schedule(runnable.schedule, function() {
-				// 			console.log("Executing command -----")
-				// 		});
-				// 	}
-				// })
 			})
 
 			
@@ -225,6 +211,7 @@ router.delete("/:id", async (req, res) => {  // Delete runnable
 
 	try {
 		runnable = await Runnable.findOne({fileName: req.params.id})
+		unscheduleRunnable(runnable);
 		try {
 			await runnable.remove();
 		} catch {

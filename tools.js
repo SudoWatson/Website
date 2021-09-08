@@ -1,10 +1,9 @@
 const exec = require("child_process").exec;
-const {spawn} = require('child_process');
+const {spawn} = require("child_process");
 const loadenv = require("dotenv");
 const nodegit = require("nodegit");
 const path = require("path");
-const fs = require('fs');
-
+const fs = require("fs");
 
 const User = require("./models/user.js");
 
@@ -14,7 +13,7 @@ if (process.env.NODE_ENV !== "production") {
 
 /**
  * Returns the username and email of the current user under the current session
- * @param {*} req 
+ * @param {*} req
  * @returns user
  */
 function getCurrentUser(req) {
@@ -29,16 +28,6 @@ function getCurrentUser(req) {
 }
 
 /**
- * Runs a bash command
- * @param {string} command 
- * @param {Function} callback
- * @returns child_process.exec
- */
-function bash(command, callback) {
-	return exec(("bash ./bash/ " + command), callback);
-}
-
-/**
  * Testing callback function to place into bash(command, bashback) to return stdout and err
  */
 function bashback(err, stdout, stderr) {
@@ -50,8 +39,18 @@ function bashback(err, stdout, stderr) {
 }
 
 /**
+ * Runs a bash command
+ * @param {string} command
+ * @param {Function} callback
+ * @returns child_process.exec
+ */
+function bat(command, callback=bashback) {
+	return exec("batch\\" + command, callback);
+}
+
+/**
  * Finds the user associated with 'usernameEmail' in database
- * @param {string} usernameEmail 
+ * @param {string} usernameEmail
  * @returns {User} user
  */
 async function getUser(usernameEmail) {
@@ -74,13 +73,13 @@ async function getUser(usernameEmail) {
 
 /**
  * Finds the user associated the the ID in database
- * @param {string} ID 
+ * @param {string} ID
  * @returns user
  */
 async function getUserByID(ID) {
 	return await User.findById(ID, async (err, user) => {
 		if (err) {
-			console.error(err)
+			console.error(err);
 			return err;
 		} else {
 			return user;
@@ -111,44 +110,49 @@ function checkNotAuth(req, res, next) {
 /**
  * Clones the git repository 'repoURL' to file "./runnables/'localFile'"
  * @param {string} repoURL
- * @param {string} localFile 
- * @param {Function} callback 
+ * @param {string} localFile
+ * @param {Function} callback
  */
 function cloneGit(repoURL, localFile, callback) {
-	console.log("CLONING GIT")
-	nodegit.Clone(repoURL, path.join("./runnables", localFile)).then(function (repo) {
-		console.log("Cloned " + path.basename(repoURL) + " to " + repo.workdir());
-		callback();
-	}).catch(function (err) {
-		console.log(err);
-	});
+	console.log("CLONING GIT");
+	nodegit
+		.Clone(repoURL, path.join("./runnables", localFile))
+		.then(function (repo) {
+			console.log(
+				"Cloned " + path.basename(repoURL) + " to " + repo.workdir()
+			);
+			callback();
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
 }
 
 /**
  * Runs a python script with optional paramaters
- * @param {string} script 
- * @param {array} params 
+ * @param {string} script
+ * @param {array} params
  */
-function runPython(script, params={}) {
-	spawn("python", [...script, ...params])
+function runPython(script, params = {}) {
+	spawn("python", [...script, ...params]);
 }
 
 /**
  * Removes the directory of the included runnable
- * @param {String} runnable 
+ * @param {String} runnable
  */
 async function rmRunnable(runnable) {
 	fs.rmdir(path.join("./runnables", runnable), {recursive: true}, (err) => {
 		if (err) {
-			console.error(`Error removing runnable directory ${runnable}`)
-			console.error(err)
+			console.error(`Error removing runnable directory ${runnable}`);
+			console.error(err);
 		}
-	})
+	});
 }
 
 module.exports = {
 	getCurrentUser,
-	bash,
+	bat,
 	bashback,
 	getUserByID,
 	getUser,
