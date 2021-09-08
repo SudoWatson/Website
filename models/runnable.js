@@ -32,7 +32,7 @@ const runnablesSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    runPath: {
+    main: {
         type: String,
         required: true
     },
@@ -43,6 +43,10 @@ const runnablesSchema = new mongoose.Schema({
     tags: {
         type: Array,
         required: false
+    },
+    roleAccess: {
+        type: Array,
+        require: false
     }
 });
 

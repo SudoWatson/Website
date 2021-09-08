@@ -17,8 +17,9 @@ All runnables begin with a run.py(?)
 If the runnable's schedule time is after the previous recorded time but before the current time, run
 */
 
-/* TODO	Snippets.json
+/* TODO	Properly create snippets
 	https://code.visualstudio.com/docs/editor/userdefinedsnippets
+	Properly create extra snippets
 	Try using LINE_COMMENT for snippet comments
 	Try using TM_FILENAME_BASE for schema name
 	Change snippets to require tools, then set getCurrentUser to tools.etc
@@ -26,11 +27,17 @@ If the runnable's schedule time is after the previous recorded time but before t
 
 // TODO Add error message partial
 
+// TODO Use /** for function summaries */
+
+// TODO Switch to TypeScript
+
+// TODO Switch to imports
+
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
 
-// Modules
+// Imports
 const express = require("express");
 const fs = require("fs"); // File handler
 const mongoose = require("mongoose");
@@ -43,12 +50,9 @@ const methodOverride = require("method-override");
 const slug = require("slug")
 
 const initPassport = require("./passport-config");
-const tools = require("./tools");
-
+const scheduleManager = require("./scheduleManagement")
 // Import sets
-const checkAuth = tools.checkAuth,
-	  checkNotAuth = tools.checkNotAuth;
-const getCurrentUser = tools.getCurrentUser;
+const {checkAuth, checkNotAuth, getCurrentUser, getUser, getUserByID} = require("./tools")
 
 // Routes
 const accountRoutes = require("./routes/account");
@@ -79,7 +83,7 @@ app.use(passport.session());
 app.use(methodOverride("_method")); // Allows us to send DELETE and PUT from forms. _method= in URL overrides the actual form method
 
 // Passport Setup
-initPassport(passport, tools.getUser, tools.getUserByID);
+initPassport(passport, getUser, getUserByID);
 
 // MongoosDB Setup
 mongoose.connect(process.env.DATABASE_URL, {
@@ -90,6 +94,10 @@ let db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
 
+
+scheduleManager.scheduleRunnables();
+
+
 // ----============= SERVER REQUESTS GO THROUGH HERE =============----
 app.get("/", (req, res) => {
 	// app.get(url, (req, res) { Stuff to do for that URL })
@@ -98,14 +106,13 @@ app.get("/", (req, res) => {
 
 app.use("/runnables", runnablesRoute)
 
-
-app.get("/signin", accountRoutes);
+app.get("/signIn", accountRoutes);
 app.all(["/signUp", "/logOut", "/account"], accountRoutes);
 app.post(	// TODO Redirect to previous URL after sign in
-	"/signin",
+	"/signIn",
 	passport.authenticate("local", {
 		successRedirect: "/",
-		failureRedirect: "/signin",
+		failureRedirect: "/signIn",
 		failureFlash: true,
 	})
 );

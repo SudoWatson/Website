@@ -6,14 +6,7 @@
             "css": "link[href='base.css' type='text/css' rel='stylesheet']",
             "header": "header>a[href=/]>h3>{Austin's<br>RaspbianServer}",
             "!!": "!!!+html[lang=${lang}]>(head>meta[charset=${charset}]+meta:vp+css+title{${1:Document}})+header+body",
-            "!": "{<%- contentFor('title') %> ${1:Title} <%- contentFor('body') %>\n}",
-
-            "R!": "{// Require Packages\nconst express = require(\"express\");\nconst router = express.Router();\nconst getCurrentUser = require(\"${1:..}/tools\").getCurrentUser;\n\n// Require Models (If any)\n\n// Routes\nrouter.get(\"${2:/}\", (req, res) => {\n    res.render(\"${3:}\", {user: getCurrentUser(req)\\});\n\\});\n\n// Exports\nmodule.exports = {init, router\\};}",
-            "S!": "{const mongoose = require(\"mongoose\");\n\nconst ${1:collectionName}Schema = new mongoose.Schema({\n    ${2:field1}: {\n        type: ${3:String},\n        required: ${4:false}\n    \\},${5:}\n\\});\n\n//                                 Collection         Schema format\nmodule.exports = mongoose.model(\"${1:collectionName}\", ${1:collectionName}Schema);}",
-            "GET!": "{router.get(\"/${1:get}\", (req, res) => {\n    res.send(\"${2:Hello World}\");\n\\});}",
-            "POST!": "{router.post(\"/${1:post}\", (req, res) => {\n    res.send(\"${2:Hello World}\");\n\\});}",
-            "PUT!": "{router.put(\"/${1:put}\", (req, res) => {\n    res.send(\"${2:Hello World}\");\n\\});}",
-            "DELETE!": "{router.delete(\"/${1:delete}\", (req, res) => {\n    res.send(\"${2:Hello World}\");\n\\});}"
+            "!": "{<%- contentFor('title') %> ${1:Title} <%- contentFor('body') %>\n}"
         }
     }
 }

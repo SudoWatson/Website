@@ -1,6 +1,6 @@
 <%- contentFor('title') %> Edit <%= runnable.title %> <%- contentFor('body') %>
 <h1>Edit <%= runnable.title %></h1>
-<form action="/runnables/spotify-downloader?_method=PUT" method="POST">
+<form action=".?_method=PUT" method="POST">
 	<%- include("runnableFormFields", {editing: true}) %>
     <a href="/runnables/<%= runnable.fileName %>">Cancel</a>
 	<button class="runnables submit" type="submit">Update</button>

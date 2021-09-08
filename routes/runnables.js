@@ -1,14 +1,14 @@
 // Require Packages
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+const multer = require("multer");const exec = require("child_process").exec;
 const fs = require("fs");
 const path = require("path");
 const slug = require("slug");
 const methodOverride = require("method-override");
 
-const bash = require("../tools").bash;
-const getCurrentUser = require("../tools").getCurrentUser
+const {bash, bashback, getCurrentUser, cloneGit, runPython, rmRunnable} = require("../tools")
+const {scheduleRunnable, unscheduleRunnable} = require("../scheduleManagement")
 
 // Require Models (If any)
 const Runnable = require("../models/runnable");
@@ -25,10 +25,10 @@ const upload = multer({
 });
 
 // Uses
-router.use(methodOverride("_method"))
+router.use(methodOverride("_method"));
 
 // Routes
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {  // View all runnables
 	try {
 		const runnables = await Runnable.find({});
 		res.render("runnables/runnables.ejs", {
@@ -38,16 +38,25 @@ router.get("/", async (req, res) => {
 	} catch (e) {}
 });
 
+/** Add New Runnable Program */
 router.post("/", upload.single("cover"), async (req, res) => {
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");
-	if (formData.schedule) runStyle.push("schedule");
+	if (formData.runSchedule) runStyle.push("schedule");
 
-	const fileName = slug(formData.title);
+	// Create cover image name
+	let fileName = slug(formData.title);
+	let i = 0
+	while (fs.existsSync(`./runnables/${fileName}`)) {  // Relative to path of app.js, likely because that's where the console working directory is
+		i++;
+		fileName = slug(formData.title);
+		fileName = fileName + i.toString();
+	}
 	const coverName = req.file != null ? req.file.filename : null;
 
 	// Test of the Link system
+	// TODO going to have to change
 	let links = {};
 	linkName = formData.links.replace("https://", "").slice(0, -4); // Removes 'https://' as well as potential '.git'
 	linkName = linkName.split(".");
@@ -66,25 +75,30 @@ router.post("/", upload.single("cover"), async (req, res) => {
 		description: formData.description,
 		imageName: coverName,
 		links: linkData,
-		schedule: null,
+		schedule: formData.schedule,
 		autoUpdateOnRun: formData.autoUpdate === "on",
-		runPath: formData.runPath,
+		main: formData.mainPath,
 		runStyle: runStyle,
-		tags: formData.tags.split(/\s+/),
+		tags: formData.tags.split(/\s+/)
 	});
-
-	try {
+	
+	try {  // Adding runnable
 		const newRunnable = await runnable.save();
-		bash(
-			`bash getRunnable.bash ${runnable.links["github"]} ${runnable.fileName}`,
-			function (err, stdout, stderr) {
-				if (err) {
-					console.error(stderr);
-				} else {
-					console.log(stdout);
-				}
-			}
-		);
+
+		// Clone repo from Git, set Schedule if needed
+		if (runnable.links["github"] !== undefined) {
+			cloneGit(runnable.links["github"], runnable.fileName, () => {
+				const newVenv = exec((`batch\\newVenv.bat ${runnable.fileName}`), bashback);
+				newVenv.on("close", () => {
+					if (runnable.runStyle.includes("schedule")) {
+						scheduleRunnable(runnable)
+					}
+				})
+			})
+
+			
+		}
+		
 
 		res.redirect(`/runnables/${runnable.fileName}`);
 	} catch (e) {
@@ -98,6 +112,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 				}
 			});
 		}
+		rmRunnable(runnable.fileName)
 		res.render("/runnables/new");
 	}
 });
@@ -110,7 +125,7 @@ router.get("/new", (req, res) => {
 });
 
 // Methods for Individual Runnables
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {  // Runnable page
 	try {
 		const runnable = await Runnable.findOne({fileName: req.params.id})
 		res.render("runnables/runnable.ejs",{
@@ -122,7 +137,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", async (req, res) => {  // Edit page for runnable
 	try {
 		const runnable = await Runnable.findOne({fileName: req.params.id})
 		res.render("runnables/editRunnable.ejs",{
@@ -134,7 +149,7 @@ router.get("/:id/edit", async (req, res) => {
 	}
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {  // Update runnable
 	const formData = req.body;
 	let runStyle = [];
 	if (formData.manual) runStyle.push("manual");
@@ -157,10 +172,12 @@ router.put("/:id", async (req, res) => {
 
 	try {
 		runnable = await Runnable.findOne({fileName: req.params.id})
+		console.log(runnable)
 		runnable.title = req.body.title;
 		runnable.description = formData.description;
-		runnable.runPath = formData.runPath;
+		runnable.main = formData.main;
 		runnable.autoUpdateOnRun = formData.autoUpdate === "on";
+		runnable.schedule = formData.schedule;
 		runnable.runStyle = runStyle
 		await runnable.save();
 		bash(
@@ -188,28 +205,26 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {  // Delete runnable
 	const formData = req.body;
 	let runnable;
 
 	try {
 		runnable = await Runnable.findOne({fileName: req.params.id})
-		await runnable.remove();
-		bash(
-			`bash rm.bash runnables/${runnable.fileName}`,
-			function (err, stdout, stderr) {
-				if (err) {
-					console.error(stderr);
-				} else {
-					console.log(stdout);
-				}
+		unscheduleRunnable(runnable);
+		try {
+			await runnable.remove();
+		} catch {
+			if (runnable == null) {  // Runnable doesn't exist
+				return res.redirect("/runnables")
 			}
-		);
+		}
 
+		rmRunnable(runnable.fileName)
 		fs.unlink(path.join(uploadPath, runnable.imageName), (e2) => {
 			if (e2) {
 				console.error("Error deleting runnable cover");
-				consol.error(e2);
+				console.error(e2);
 			}
 		});
 
