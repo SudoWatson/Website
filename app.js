@@ -33,26 +33,28 @@ If the runnable's schedule time is after the previous recorded time but before t
 
 // TODO Switch to imports
 
+import {config} from "dotenv"
 if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
+	config()
 }
 
 // Imports
-const express = require("express");
-const fs = require("fs"); // File handler
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const passport = require("passport");
-const flash = require("express-flash");
-const session = require("express-session");
-const expressLayouts = require("express-ejs-layouts");
-const methodOverride = require("method-override");
-const slug = require("slug")
+import express from "express"
+import fs from "fs"
+import mongoose from "mongoose"
+import bodyParser from "body-parser"
+import passport from "passport"
+import flash from "express-flash"
+import session from "express-session"
+import expressLayouts from "express-ejs-layouts"
+import methodOverride from "method-override"
+import slug from "slug"
 
-const initPassport = require("./passport-config");
-const scheduleManager = require("./scheduleManagement")
+import initPassport from "./passport-config.js"
+import scheduleManager from "./scheduleManagement.js"
+
 // Import sets
-const {checkAuth, checkNotAuth, getCurrentUser, getUser, getUserByID} = require("./tools")
+import tools from "./tools.js"
 
 // Routes
 const accountRoutes = require("./routes/account");
@@ -83,7 +85,7 @@ app.use(passport.session());
 app.use(methodOverride("_method")); // Allows us to send DELETE and PUT from forms. _method= in URL overrides the actual form method
 
 // Passport Setup
-initPassport(passport, getUser, getUserByID);
+initPassport(passport, tools.getUser, tools.getUserByID);
 
 // MongoosDB Setup
 mongoose.connect(process.env.DATABASE_URL, {
@@ -101,7 +103,7 @@ scheduleManager.scheduleRunnables();
 // ----============= SERVER REQUESTS GO THROUGH HERE =============----
 app.get("/", (req, res) => {
 	// app.get(url, (req, res) { Stuff to do for that URL })
-	res.render("index.ejs", {user: getCurrentUser(req)});
+	res.render("index.ejs", {user: tools.getCurrentUser(req)});
 });
 
 app.use("/runnables", runnablesRoute)

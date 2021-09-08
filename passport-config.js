@@ -1,5 +1,6 @@
-const localStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt"
+import {Strategy as localStrategy} from "passport-local"
+
 
 async function init(passport, getUserByEmail, getUserByID) {
 	const authenticateUser = async (email, password, done) => {

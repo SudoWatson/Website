@@ -1,15 +1,10 @@
-const exec = require("child_process").exec;
-const {spawn} = require("child_process");
-const loadenv = require("dotenv");
-const nodegit = require("nodegit");
-const path = require("path");
-const fs = require("fs");
+import {exec, spawn} from "child_process"
+import nodegit from "nodegit"
+import path from "path"
+import fs from "fs"
 
-const User = require("./models/user.js");
+import User from "./models/user.js"
 
-if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
-}
 
 /**
  * Returns the username and email of the current user under the current session

@@ -1,17 +1,17 @@
 // Require Packages
-const express = require("express");
-const router = express.Router();
-const multer = require("multer");const exec = require("child_process").exec;
-const fs = require("fs");
-const path = require("path");
-const slug = require("slug");
-const methodOverride = require("method-override");
+import {router} from "express"
+import multer from "multer"
+import {exec} from "child_process"
+import fs from "fs"
+import path from "path"
+import slug from "slug"
+import methodOverride from "method-override"
 
-const {bash, bashback, getCurrentUser, cloneGit, runPython, rmRunnable} = require("../tools")
-const {scheduleRunnable, unscheduleRunnable} = require("../scheduleManagement")
+import * from "../tools.js"
+import {scheduleRunnable, unscheduleRunnable} from "../scheduleManagement"
 
-// Require Models (If any)
-const Runnable = require("../models/runnable");
+// Require Models
+import Runnable from "../models/runnable.js"
 
 
 // Other Setup

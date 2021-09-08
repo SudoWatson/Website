@@ -1,7 +1,9 @@
-const cron = require("node-cron");
-const Runnable = require("./models/runnable.js");
+import cron from "node-cron"
 
-const {bat} = require("./tools")
+import {bat} from "./tools.js"
+
+import Runnable from "./models/runnable.js"
+
 
 let schedules = {}
 
