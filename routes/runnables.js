@@ -6,6 +6,7 @@ import fs from "fs"
 import path from "path"
 import slug from "slug"
 import methodOverride from "method-override"
+import { fileURLToPath } from 'url';
 
 import * as tools from "../tools.js"
 import {scheduleRunnable, unscheduleRunnable} from "../scheduleManagement.js"
@@ -16,6 +17,7 @@ import Runnable, {imageBasePath} from "../models/runnable.js"
 
 // Other Setup
 let getCurrentUser = tools.getCurrentUser;
+const __filename = fileURLToPath(import.meta.url);
 
 const router = Router();
 const imgExtensionTypes = ["image/jpeg", "image/png"];
@@ -63,7 +65,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 	// Test of the Link system
 	// TODO going to have to change
 	let links = {};
-	linkName = formData.links.replace("https://", "").slice(0, -4); // Removes 'https://' as well as potential '.git'
+	let linkName = formData.links.replace("https://", "").slice(0, -4); // Removes 'https://' as well as potential '.git'
 	linkName = linkName.split(".");
 	if (linkName.length - 1 >= 2) {
 		linkName = linkName[1];
@@ -71,7 +73,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 		linkName = linkName[0];
 	}
 
-	linkData = {[linkName]: formData.links};
+	let linkData = {[linkName]: formData.links};
 	// End Link system
 
 	const runnable = new Runnable({
@@ -92,8 +94,8 @@ router.post("/", upload.single("cover"), async (req, res) => {
 
 		// Clone repo from Git, set Schedule if needed
 		if (runnable.links["github"] !== undefined) {
-			cloneGit(runnable.links["github"], runnable.fileName, () => {
-				const newVenv = exec((`batch\\newVenv.bat ${runnable.fileName}`), bashback);
+			tools.cloneGit(runnable.links["github"], runnable.fileName, () => {
+				const newVenv = exec((`batch\\newVenv.bat ${runnable.fileName}`), tools.bashback);
 				newVenv.on("close", () => {
 					if (runnable.runStyle.includes("schedule")) {
 						scheduleRunnable(runnable)
@@ -117,7 +119,7 @@ router.post("/", upload.single("cover"), async (req, res) => {
 				}
 			});
 		}
-		rmRunnable(runnable.fileName)
+		tools.rmRunnable(runnable.fileName)
 		res.render("/runnables/new");
 	}
 });
@@ -225,7 +227,7 @@ router.delete("/:id", async (req, res) => {  // Delete runnable
 			}
 		}
 
-		rmRunnable(runnable.fileName)
+		tools.rmRunnable(runnable.fileName)
 		fs.unlink(path.join(uploadPath, runnable.imageName), (e2) => {
 			if (e2) {
 				console.error("Error deleting runnable cover");

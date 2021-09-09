@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt"
 import {Strategy as localStrategy} from "passport-local"
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
 
 
 async function init(passport, getUserByEmail, getUserByID) {

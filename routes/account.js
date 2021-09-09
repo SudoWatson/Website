@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt"
 import {Router, urlencoded} from "express"
+import { fileURLToPath } from 'url';
 
 import * as tools from "../tools.js"
 
@@ -7,6 +8,7 @@ import User from "../models/user.js"
 
 
 const router = Router();
+const __filename = fileURLToPath(import.meta.url);
 
 const getCurrentUser = tools.getCurrentUser
 const checkAuth = tools.checkAuth
@@ -21,6 +23,7 @@ router.get("/account", checkAuth, (req, res) => {
 
 // TODO Confirm account deletion
 router.delete("/account", checkAuth, async (req, res) => {
+	let user;
 	try {
 		user = await tools.getUser(req.user.email)
 		await user.remove()
