@@ -19,10 +19,19 @@ function scheduleRunnable(runnable) {
             console.log("Running cron")
             const runProgram = bat(command)
         });
+
         schedules[runnable.fileName] = task
     }
 }
 
+/**
+ * Updates the schedule of provided runnable
+ * @param {Runnable} runnable Runnable to update schedule
+ */
+function updateSchedule(runnable) {
+    unscheduleRunnables(runnable);
+    scheduleRunnable(runnable);
+}
 
 /**
  * Unschedules the provided runnable from being ran
@@ -63,7 +72,8 @@ function unscheduleRunnables() {
 
 
 
-module.exports = {
+export {
+    updateSchedule,
     scheduleRunnable,
 	scheduleRunnables,
     unscheduleRunnable,

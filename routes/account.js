@@ -1,15 +1,18 @@
-const bcrypt = require("bcrypt");
-const express = require("express");
-const router = express.Router();
+import bcrypt from "bcrypt"
+import {Router, urlencoded} from "express"
 
-const tools = require("../tools")
+import * as tools from "../tools.js"
+
+import User from "../models/user.js"
+
+
+const router = Router();
 
 const getCurrentUser = tools.getCurrentUser
 const checkAuth = tools.checkAuth
 
-const User = require("../models/user.js");
 
-router.use(express.urlencoded({extended: false})); // Allows us to access the form data via req.body.formField
+router.use(urlencoded({extended: false})); // Allows us to access the form data via req.body.formField
 
 
 router.get("/account", checkAuth, (req, res) => {
@@ -83,4 +86,4 @@ router.delete("/logOut", (req, res) => {
 	res.redirect("/")
 })
 
-module.exports = router;
+export default router;

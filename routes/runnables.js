@@ -1,5 +1,5 @@
 // Require Packages
-import {router} from "express"
+import {Router} from "express"
 import multer from "multer"
 import {exec} from "child_process"
 import fs from "fs"
@@ -7,16 +7,19 @@ import path from "path"
 import slug from "slug"
 import methodOverride from "method-override"
 
-import * from "../tools.js"
-import {scheduleRunnable, unscheduleRunnable} from "../scheduleManagement"
+import * as tools from "../tools.js"
+import {scheduleRunnable, unscheduleRunnable} from "../scheduleManagement.js"
 
 // Require Models
-import Runnable from "../models/runnable.js"
+import Runnable, {imageBasePath} from "../models/runnable.js"
 
 
 // Other Setup
+let getCurrentUser = tools.getCurrentUser;
+
+const router = Router();
 const imgExtensionTypes = ["image/jpeg", "image/png"];
-const uploadPath = path.join("public", Runnable.imageBasePath);
+const uploadPath = path.join("public", imageBasePath);
 const upload = multer({
 	dest: uploadPath,
 	fileFilter: (req, file, callback) => {
@@ -35,7 +38,9 @@ router.get("/", async (req, res) => {  // View all runnables
 			runnables: runnables,
 			user: getCurrentUser(req),
 		});
-	} catch (e) {}
+	} catch (e) {
+		res.send("Error getting runnables page")
+	}
 });
 
 /** Add New Runnable Program */
@@ -243,4 +248,4 @@ router.delete("/:id", async (req, res) => {  // Delete runnable
 });
 
 // Exports
-module.exports = router;
+export default router;

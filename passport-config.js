@@ -28,7 +28,7 @@ async function init(passport, getUserByEmail, getUserByID) {
 		return done(null, user._id);
 	});
 	passport.deserializeUser(async (id, done) => {
-		user = await getUserByID(id);
+		let user = await getUserByID(id);
 		if (user == null) {
 			return done(null, false, {error: "User doesn't exist"});
 		} else {
@@ -37,4 +37,4 @@ async function init(passport, getUserByEmail, getUserByID) {
 	});
 }
 
-module.exports = init;
+export default init;

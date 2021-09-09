@@ -1,5 +1,4 @@
-//import * as mongoose from "mongoose";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -18,5 +17,5 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 });
-//							Collection   Schema format
+let userModel = mongoose.model("users", userSchema);
 module.exports = mongoose.model("users", userSchema);

@@ -1,8 +1,9 @@
 // Require Packages
-const express = require("express");
-const router = express.Router();
-const tools = require("../tools")
+import {Router} from "express"
 
+import * as tools from "../tools.js"
+
+const router = Router();
 const getCurrentUser = tools.getCurrentUser
 
 // Require Models (If any)
@@ -13,4 +14,4 @@ router.get("/", (req, res) => {
 });
 
 // Exports
-module.exports = router;
+export default router;

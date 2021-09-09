@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Imports
+import path from "path"
 import express from "express"
 import fs from "fs"
 import mongoose from "mongoose"
@@ -51,18 +52,17 @@ import methodOverride from "method-override"
 import slug from "slug"
 
 import initPassport from "./passport-config.js"
-import scheduleManager from "./scheduleManagement.js"
+import * as scheduleManager from "./scheduleManagement.js"
 
 // Import sets
-import tools from "./tools.js"
+import * as tools from "./tools.js"
 
 // Routes
-const accountRoutes = require("./routes/account");
-const programsRoute = require("./routes/programs");
-const runnablesRoute = require("./routes/runnables");
+import accountRoutes from "./routes/account.js"
+import programsRoute from "./routes/programs.js"
+import runnablesRoute from "./routes/runnables.js"
 
 // Misc. Server Info
-const path = require("path");
 const port = process.env.PORT || 3000;
 
 // Express Setup
@@ -70,7 +70,7 @@ const app = express();
 app.set("view-engine", "ejs");
 app.set("layout", "partials/base.ejs");
 app.use(expressLayouts);
-app.use(express.static(__dirname+"/public"));  // When linking CSS file, must include beginning '/' EX: "/base.css"
+app.use(express.static("public"));  // When linking CSS file, must include beginning '/' EX: "/base.css"
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
 app.use(flash());
 app.use(
@@ -96,7 +96,7 @@ let db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
 
-
+//Misc. Setup
 scheduleManager.scheduleRunnables();
 
 
