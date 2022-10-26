@@ -1,12 +1,12 @@
-import { exec, spawn } from "child_process";
+import * as child_process from "child_process";
 import nodegit from "nodegit";
 import path from "path";
 import fs from "fs";
 import User from "./models/user.js";
 /**
  * Returns the username and email of the current user under the current session
- * @param {*} req
- * @returns user
+ * @param {Request} req
+ * @returns {User} user
  */
 function getCurrentUser(req) {
     // Sets information about the user in the req field to be used
@@ -36,7 +36,7 @@ function bashback(err, stdout, stderr) {
  * @returns child_process.exec
  */
 function bat(command, callback = bashback) {
-    return exec("batch\\" + command, callback);
+    return child_process.exec("batch\\" + command, callback);
 }
 /**
  * Finds the user associated with 'usernameEmail' in database
@@ -104,7 +104,7 @@ function checkNotAuth(req, res, next) {
 function cloneGit(repoURL, localFile, callback) {
     console.log("CLONING GIT");
     nodegit
-        .Clone(repoURL, path.join("./runnables", localFile))
+        .Clone.clone(repoURL, path.join("./runnables", localFile))
         .then(function (repo) {
         console.log("Cloned " + path.basename(repoURL) + " to " + repo.workdir());
         callback();
@@ -112,14 +112,6 @@ function cloneGit(repoURL, localFile, callback) {
         .catch(function (err) {
         console.log(err);
     });
-}
-/**
- * Runs a python script with optional paramaters
- * @param {string} script
- * @param {array} params
- */
-function runPython(script, params = []) {
-    spawn("python", [...script, ...params]);
 }
 /**
  * Removes the directory of the included runnable

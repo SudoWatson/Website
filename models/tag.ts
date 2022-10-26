@@ -1,23 +1,23 @@
-//import * as mongoose from "mongoose";
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
+
 const userSchema = new mongoose.Schema({
-	username: {
-		type: String,
-		required: true
-	},
-	email: {
-		type: String,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	},
-	roles: {
-		type: Array,
-		required: true
-	},
+    username: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    roles: {
+        type: Array,
+        required: true
+    },
 });
 
-//							Collection   Schema format
+let userModel = mongoose.model("users", userSchema);
 module.exports = mongoose.model("users", userSchema);
