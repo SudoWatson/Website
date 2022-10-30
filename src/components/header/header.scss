@@ -1,0 +1,40 @@
+@import "../../vars";
+
+
+.main-nav {
+    z-index: 100;
+    margin: 0;
+    padding: 1em 0;
+    margin-bottom: 6rem;
+    width: 100%;
+    background-color: $nav-color;
+
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        padding-left: 1%;
+        
+        &.social-links {
+            padding-right: 1%;
+        }
+        li {
+            display: inline;
+            a {
+                margin: 10px;
+                text-decoration: none;
+                color: white;
+                .active, &:hover {
+                    color: #1FAE92
+                }
+            }
+        }
+    }
+}
