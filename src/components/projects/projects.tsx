@@ -4,6 +4,8 @@ import './projects.css';
 
 import Project from './project/project';
 
+import projectData from '../../projectData/projects';
+
 type Props = {};
 
 type State = {};
@@ -14,13 +16,14 @@ export default class projects extends Component<Props, State> {
     // TODO Get this any outta here
     const projectDivs: any[] = [];
 
-    projectData.forEach((proj: ProjectProps) => {
+    projectData.forEach((proj: ProjectData) => {
         projectDivs.push(<Project {...proj} />)
     })
 
     return (
         <>
       <div id='Projects' className='snap-to'>
+        {/* eslint-disable-next-line*/}
         <p className="comment">// Projects</p>
         <div id="projectContainer">
             {projectDivs}
@@ -30,32 +33,3 @@ export default class projects extends Component<Props, State> {
     )
   }
 }
-
-// TODO Clean this up
-
-type ProjectProps = {
-    title?: string,
-    imgPath?: string,
-    desc?: string,
-    repoURL?: string | null,
-    demoURL?: string | null,
-    on?: boolean
-  };
-
-
-const projectData = [
-    {
-        title: "Test Project",
-        imgPath: "https://picsum.photos/700/525",
-        desc: "Just a quick tester boilerplate for projects",
-        repoURL: null,
-        demoURL: null,
-    },
-    {
-        title: "Secondary Project",
-        imgPath: "https://picsum.photos/701/525",
-        desc: "Just a quick tester boilerplate for projects",
-        repoURL: null,
-        demoURL: null,
-    }
-]

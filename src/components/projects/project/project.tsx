@@ -14,8 +14,13 @@ type Props = {
   on?: boolean
 };
 
+/**
+ * @param {boolean} isPopUpVis - Boolean of whether or not the project popup is visible
+ * @param {boolean} isHovering - Boolean of whether or not the mouse is hovering over the project thumbnail
+ */
 type State = {
   isPopUpVis: boolean,
+  isHovering: boolean,
 };
 
 export default class project extends Component<Props, State> {
@@ -26,17 +31,23 @@ export default class project extends Component<Props, State> {
     
     this.state = {
       isPopUpVis: this.props.on || false,
+      isHovering: false,
     };
 
 
     this.onClick = this.onClick.bind(this);
+    this.onMouseOver = this.onMouseOver.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
   render() {
     return (
       <>
-        <div id="ProjectThumbnail" onClick={this.onClick}>
-          <img src="https://picsum.photos/700/525" alt="Test Pic" />
+        <div id="ProjectThumbnail" onClick={this.onClick} >
+          <img src={this.props.imgPath} alt="Test Pic" onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}/>
+          {this.state.isHovering &&
+          <p id='thumbnailTitle'>{this.props.title}</p>
+          }
         </div>
         {this.state.isPopUpVis &&
         <div id="ProjectPopup">
@@ -73,5 +84,17 @@ export default class project extends Component<Props, State> {
     this.setState({
       isPopUpVis: !this.state.isPopUpVis,
     });
+  }
+
+  onMouseOver() {
+    this.setState({
+      isHovering: true,
+    })
+  }
+
+  onMouseLeave() {
+    this.setState({
+      isHovering: false,
+    })
   }
 }

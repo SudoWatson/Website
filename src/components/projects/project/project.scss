@@ -1,3 +1,5 @@
+$thumbnailZoom: scale(1.025);
+
 #ProjectThumbnail {
     width: 700px;
     height: 525px;
@@ -8,8 +10,22 @@
     img {
         width: 100%;
         &:hover {
-            transform: scale(1.025);
+            transform: $thumbnailZoom;
         }
+    }
+
+    p {
+        position: relative;
+        padding: 1rem 1px;
+        left: -1px;
+        bottom: 3rem;
+        width: 100%;
+        transform: $thumbnailZoom;
+        background-color: rgba(0,0,0,.9);
+        text-align: center;
+        text-justify: center;
+        
+        pointer-events: none;
     }
 }
 
@@ -29,7 +45,7 @@
 
     display: grid;
     grid-template-columns: 60% 40%; 
-    grid-template-rows: [title] 10% [tags] 15% [about] auto [buttons] 10%; 
+    grid-template-rows: [title] 10% [tags] 15% [about] auto [buttons] 10%;
 
     img {
         grid-column: 1;
@@ -48,21 +64,18 @@
         grid-row: tags;
 
         margin: 1em;
-        background-color: orange;
     }
 
     #aboutProject {
         margin: 0 1em;
         grid-column: 2;
         grid-row: about;
-        background-color: aqua;
     }
 
     #buttons {
         margin: 1rem;
         grid-column: 2;
         grid-row: buttons;
-        background-color: purple;
 
         display: flex;
         justify-content: space-around;
