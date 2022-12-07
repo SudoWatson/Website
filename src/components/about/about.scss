@@ -1,3 +1,22 @@
 #About {
-    height: 50vh;
+    height: fit-content;
+    margin-bottom: 10rem;
+
+
+    #aboutContent {
+        padding: 1rem 4rem;
+        display: flex;
+        justify-content: space-around;
+
+        #aboutMe {
+            width: 53%;
+            font-size: 2rem;
+            line-height: 3rem;
+        }
+
+        #bbimg {
+            width: 30%;
+        }
+    }
+
 }

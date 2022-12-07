@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 
 import './project.css';
 
-type Tag = 'HTML' | 'Java'
+type Tag = 'HTML' | 'Java';
 
-type Props = {
-  title?: string,
-  imgPath?: string,
-  tags?: Tag[],
-  desc?: string,
-  repoURL?: string | null,
-  demoURL?: string | null,
-  on?: boolean
-};
+type Props = ProjectData;
+
 
 /**
  * @param {boolean} isPopUpVis - Boolean of whether or not the project popup is visible
@@ -30,7 +23,7 @@ export default class project extends Component<Props, State> {
     super(props, state);
     
     this.state = {
-      isPopUpVis: this.props.on || false,
+      isPopUpVis: false,
       isHovering: false,
     };
 

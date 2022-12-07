@@ -5,8 +5,10 @@ import './app.css'
 import Home from './components/home/home';
 import Header from './components/header/header';
 import About from './components/about/about';
-import Footer from './components/footer/footer';
+import Skills from './components/skills/skills';
 import Projects from './components/projects/projects';
+import Contact from './components/contact/contact';
+import Footer from './components/footer/footer';
 
 
 export default function App() {
@@ -15,7 +17,9 @@ export default function App() {
         <Home />
         <Header />
         <About />
+        <Skills />
         <Projects />
+        <Contact />
         <Footer />
     </>
   )
