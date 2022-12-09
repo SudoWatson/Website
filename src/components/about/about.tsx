@@ -28,3 +28,8 @@ export default class about extends Component<Props, State> {
     )
   } 
 }
+
+
+/*
+I'm currently a student at Fox Valley Technical College pursuing an Associate's Degree in Software Development and a Technical Diploma in Web Design. I have self-taught myself in programming for 4+ years prior to attending college. I am continuously exposing myself to new technologies, am ever curious to expand my knowledge in every facet of software, and am always eager to learn something new.
+*/

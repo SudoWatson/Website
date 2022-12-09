@@ -16,6 +16,7 @@ type State = {
   isHovering: boolean,
 };
 
+// TODO Project and Skill need to have a key
 export default class project extends Component<Props, State> {
   state: State;
   
@@ -34,7 +35,8 @@ export default class project extends Component<Props, State> {
   }
 
   render() {
-    return (
+      // TODO Shadow still isn't lining up nicely
+      return (
       <>
         <div id="ProjectThumbnail" onClick={this.onClick} >
           <img src={this.props.imgPath} alt="Test Pic" onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}/>

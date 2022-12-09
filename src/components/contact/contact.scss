@@ -1,49 +1,9 @@
 #Contact {
+  input, textarea, button {
+    margin: 0.5rem 0;
+  }
 
-    #contact-form {
-        display: grid; 
-     
-        grid-template-rows: 4rem auto 45px;
-        grid-template-columns: 16rem auto;
-        
-        gap: 3px;
-        height: 100%;
-
-        #contact-firstName {
-            grid-row-start: 1;
-            grid-column-start: 1;
-         
-            grid-row-end: 2;
-            grid-column-end: 2;
-
-            height: fit-content;
-        }
-
-        #contact-lastName {
-            grid-row-start: 1;
-            grid-column-start: 2;
-         
-            grid-row-end: 2;
-            grid-column-end: 3;
-
-            height: fit-content;
-        }
-
-        #contact-email {
-            grid-row-start: 2;
-            grid-column-start: 1;
-         
-            grid-row-end: 3;
-            grid-column-end: 3;
-        }
-
-        #contact-message {
-            grid-row-start: 3;
-            grid-column-start: 1;
-         
-            grid-row-end: 4;
-            grid-column-end: 3;
-        }
-    }
+  textarea {
+    height: 5rem;
+  }
 }
-
