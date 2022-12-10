@@ -45,39 +45,52 @@ $thumbnailZoom: scale(1.025);
 
     z-index: 1000;
 
-    display: grid;
-    grid-template-columns: 60% 40%; 
-    grid-template-rows: [title] 10% [tags] 15% [about] auto [buttons] 10%;
+    // display: grid;
+    // grid-template-columns: 60% 40%; 
+    // grid-template-rows: [title] 10% [tags] 15% [about] auto [buttons] 10%;
+
+    .no-padding {
+        padding: 0;
+    }
 
     img {
-        grid-column: 1;
+        //grid-column: 1;
         width: 100%;
     }
 
-    h3 {
+    h2 {
         margin: 1rem;
-        grid-column: 2;
-        grid-row: title;
+        //grid-column: 2;
+        //grid-row: title;
         font-weight: normal;
     }
 
-    #projectTags {
-        grid-column: 2;
-        grid-row: tags;
+    #popupContent {
+        height: 100%;
+    }
 
-        margin: 1em;
+    #projectTags {
+        //grid-column: 2;
+        //grid-row: tags;
+
+        margin: 1rem;
+        height: 5rem;
+        font-size: smaller;
+        
+        p {
+            color: #D0D0D0;
+        }
     }
 
     #aboutProject {
         margin: 0 1em;
-        grid-column: 2;
-        grid-row: about;
+        height: 60%;
     }
 
     #buttons {
         margin: 1rem;
-        grid-column: 2;
-        grid-row: buttons;
+        //grid-column: 2;
+        //grid-row: buttons;
 
         display: flex;
         justify-content: space-around;
