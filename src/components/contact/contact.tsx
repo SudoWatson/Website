@@ -1,4 +1,4 @@
-import React, {Component, FormEventHandler} from "react";
+import React, {Component} from "react";
 import {send} from "emailjs-com";
 
 import "./contact.css";

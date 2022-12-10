@@ -1,6 +1,11 @@
 .project-button {
+
     a {
         text-decoration: none;
+        
+        &.disabled {
+            pointer-events: none;
+        }
     }
     
     button {

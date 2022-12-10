@@ -10,8 +10,8 @@ const projects: ProjectData[] = [
         title: "Secondary Project",
         imgPath: "https://picsum.photos/701/525",
         desc: "Just a quick secondary tester boilerplate for projects",
-        repoURL: null,
-        demoURL: null,
+        repoURL: "UNAVAILABLE-NOREPO",
+        demoURL: "UNAVAILABLE-NOLIVE",
     }
 ]
 

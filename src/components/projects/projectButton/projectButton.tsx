@@ -13,29 +13,39 @@ type Props = {
  */
 type State = {
 	disabled: boolean;
-  errMsg?: string,
+	errMsg?: string;
 };
 
 export default class projectButton extends Component<Props, State> {
 	constructor(props: Props, state: State) {
 		super(props, state);
 
-		this.state = {
-			disabled: false,
-		};
+		let disabled = false;
+		let errMsg;
 
-    if (this.props.url) {
-      switch (this.props.url) {
-        case "UNAVAILABLE":
-          this.setState({...this.state, disabled: true});
+			switch (this.props.url) {
+        case null:
+          disabled = true;
           break;
-        case "UNAVAILABLE-NOLIVE":
-          this.setState({...this.state, disabled: true, errMsg: "There is no live demo available for this project at the moment"});
-          break;
-        case "UNAVAILABLE-NOREPO":
-          this.setState({...this.state, disabled: true, errMsg: "There is no public code available for this project at the moment"})
-      }
-    }
+				case "UNAVAILABLE":
+					disabled = true;
+					break;
+				case "UNAVAILABLE-NOLIVE":
+					disabled = true;
+					errMsg =
+						"There is no live demo available for this project at the moment";
+					break;
+				case "UNAVAILABLE-NOREPO":
+					disabled = true;
+					errMsg =
+						"There is no public code available for this project at the moment";
+					break;
+			}
+
+		this.state = {
+			disabled: disabled,
+      errMsg: errMsg,
+		};
 
 		// Method bindings
 		//this.onMouseLeave = this.onMouseLeave.bind(this);
@@ -43,13 +53,18 @@ export default class projectButton extends Component<Props, State> {
 
 	render() {
 		return (
-			<div className="project-button">
+			<div className="project-button" onPointerOver={this.displayMsg} title={this.state.errMsg}>
 				<a
+        className={"button-link" + (this.state.disabled ? " disabled" : "")}
 					href={this.props.url || "#"}
 					rel="noreferrer"
 					target="_blank"
 				>
-					<button className="btn btn-light" disabled={this.state.disabled}>
+					<button
+            type="button"
+						className="btn btn-light"
+            disabled={this.state.disabled}
+					>
 						{this.props.type === "Demo" && (
 							<>
 								<span className="material-symbols-outlined visibility">
@@ -60,10 +75,10 @@ export default class projectButton extends Component<Props, State> {
 						)}
 						{this.props.type === "Code" && (
 							<>
-									<span className="material-symbols-outlined code">
-										code
-									</span>
-									Code
+								<span className="material-symbols-outlined code">
+									code
+								</span>
+								Code
 							</>
 						)}
 					</button>
@@ -71,4 +86,8 @@ export default class projectButton extends Component<Props, State> {
 			</div>
 		);
 	}
+
+  displayMsg() {
+
+  }
 }
