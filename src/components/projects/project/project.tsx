@@ -34,6 +34,7 @@ export default class project extends Component<Props, State> {
 
 	render() {
 		// TODO Shadow still isn't lining up nicely
+    if (this.props.title === "Template") return <></>
 		return (
 			<>
 				<div id="ProjectThumbnail" onClick={this.onClick}>
