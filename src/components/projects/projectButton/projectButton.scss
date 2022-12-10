@@ -1,0 +1,17 @@
+.project-button {
+    a {
+        text-decoration: none;
+    }
+    
+    button {
+        width: 75px;
+        height: 35px;
+    
+        color: #101010;
+        font-weight: bold;
+    
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

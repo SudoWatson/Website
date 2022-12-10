@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './project.css';
 
+import ProjectButton from '../projectButton/projectButton';
+
 type Tag = 'HTML' | 'Java';
 
 type Props = ProjectData;
@@ -18,8 +20,6 @@ type State = {
 
 // TODO Project and Skill need to have a key
 export default class project extends Component<Props, State> {
-  state: State;
-  
   constructor(props: Props, state: State) {
     super(props, state);
     
@@ -38,6 +38,7 @@ export default class project extends Component<Props, State> {
       // TODO Shadow still isn't lining up nicely
       return (
       <>
+      
         <div id="ProjectThumbnail" onClick={this.onClick} >
           <img src={this.props.imgPath} alt="Test Pic" onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}/>
           {this.state.isHovering &&
@@ -45,6 +46,8 @@ export default class project extends Component<Props, State> {
           }
         </div>
         {this.state.isPopUpVis &&
+        <>
+        <div id="PopupBackground"></div>
         <div id="ProjectPopup">
           <h4 id='closePopUp' onClick={this.onClick}>X</h4>
           
@@ -62,14 +65,11 @@ export default class project extends Component<Props, State> {
             CSS
           </div>
           <div id="buttons">
-            <a href={this.props.demoURL || "#"} rel="noreferrer" target='_blank'>
-              <button><span className="material-symbols-outlined visibility">visibility</span>Demo</button>
-            </a>
-            <a href={this.props.repoURL || "#"} rel="noreferrer" target='_blank'>
-              <button><span className="material-symbols-outlined code">code</span>Code</button>
-            </a>
+            <ProjectButton type={'Demo'} url={this.props.demoURL || '#'} />
+            <ProjectButton type={'Code'} url={this.props.repoURL || '#'} />
           </div>
         </div>
+        </>
         }
       </>
     )

@@ -80,18 +80,6 @@ $thumbnailZoom: scale(1.025);
         display: flex;
         justify-content: space-around;
         align-items: center;
-
-        button {
-            width: 75px;
-            height: 35px;
-
-            color: #101010;
-            font-weight: bold;
-
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
     }
 }
 
@@ -112,4 +100,17 @@ $thumbnailZoom: scale(1.025);
         color: black;
 
     }
+}
+
+#PopupBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 900;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+    opacity: 0.75;
 }
