@@ -1,16 +1,32 @@
 const skills: SkillData[] = [
-    {
-        imageURL: "https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png",
-        name: "HTML",
-    },
-    {
-        imageURL: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
-        name: "JavaScript",
-    },
-    {
-        imageURL: "https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png",
-        name: "Java"
-    }
-]
+	{
+		name: "HTML",
+		imageURL: "/imgs/skills/HTML5_Badge_512.png",
+	},
+	{
+		name: "JavaScript",
+		imageURL: "/imgs/skills/JavaScript-logo.png",
+	},
+	{
+		name: "TypeScript",
+		imageURL: "/imgs/skills/ts-logo-128.png",
+	},
+	{
+		name: "Java",
+		imageURL: "/imgs/skills/Java_logo.png",
+	},
+	{
+		name: "Python",
+		imageURL: "/imgs/skills/Python-logo.png",
+	},
+	{
+		name: "SQL",
+		imageURL: "/imgs/skills/SQL_logo.png",
+	},
+	{
+		name: "Git",
+		imageURL: "/imgs/skills/Git-Icon.png",
+	},
+];
 
 export default skills;

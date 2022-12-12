@@ -1,9 +1,10 @@
 .skill-badge {
-    width: fit-content;
     text-align: center;
     padding: 1rem;
 
     img {
+        width: 75px;
         height: 75px;
+        object-fit: contain;
     }
 }
