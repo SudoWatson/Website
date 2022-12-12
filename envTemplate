@@ -1,3 +1,0 @@
-DATABASE_URL=mongodb://localhost/webServer
-SESSION_SECRET=Secret for passport
-GITNAME= Username of Git user to pull projects from
