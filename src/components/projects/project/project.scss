@@ -57,8 +57,10 @@ $thumbnailZoom: scale(1.025);
     }
 
     img {
-        //grid-column: 1;
+    aspect-ratio: 700/525;
+    //grid-column: 1;
         width: 100%;
+        object-fit: cover;
     }
 
     h2 {
