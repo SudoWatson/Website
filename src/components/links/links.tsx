@@ -14,8 +14,8 @@ export default class links extends Component<Props, State> {
   render() {
     return (
       <ul className='social-links'>
-        <li><a href='https://github.com/SudoWatson' rel="noreferrer" target='_blank'><img className='social-logo' src={GH_LOGO_PATH} alt="GitHub Logo" /></a></li>
-        <li><a href='https://www.linkedin.com/in/austin-lennert-619644236/' rel="noreferrer" target='_blank'><img className='social-logo' src={LI_LOGO_PATH} alt="LinkedIn Logo" /></a></li>
+        <li><a title="GitHub" href='https://github.com/SudoWatson' rel="noreferrer" target='_blank'><img className='social-logo' src={GH_LOGO_PATH} alt="GitHub Logo" /></a></li>
+        <li><a title="LinkedIn" href='https://www.linkedin.com/in/austin-lennert-619644236/' rel="noreferrer" target='_blank'><img className='social-logo' src={LI_LOGO_PATH} alt="LinkedIn Logo" /></a></li>
       </ul>
     )
   }

@@ -24,8 +24,8 @@ export default function App() {
 				<Skills />
 				<Projects />
 				<Contact />
-				<Footer />
 			</div>
+			<Footer />
 		</div>
 	);
 }
