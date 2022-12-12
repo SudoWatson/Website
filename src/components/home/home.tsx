@@ -18,7 +18,7 @@ export default class home extends Component<Props, State> {
             < Links />
             <a href="#About"><span className="material-symbols-outlined expand_more">expand_more</span></a>
         </div>
-        <img src="/imgs/stars.jpg" id="HeaderImage" />
+        <img src="/imgs/stars.jpg" id="HeaderImage" />  // TODO Change this to something cooler and more programmy
       </div>
     )
   }

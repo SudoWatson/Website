@@ -10,18 +10,21 @@ $thumbnailZoom: scale(1.025);
     cursor: pointer;
 
     img {
-        width: 100%;
+        width: 700px;
+        height: 525px;
+        object-fit: cover;
+
         &:hover {
             transform: $thumbnailZoom;
         }
     }
 
-    p {
+    p#thumbnailTitle {
         position: relative;
         padding: 1rem 1px;
         left: -1px;
         bottom: 3rem;
-        width: 100%;
+        width: 701px;
         transform: $thumbnailZoom;
         background-color: rgba(0,0,0,.9);
         text-align: center;

@@ -25,6 +25,7 @@ export default class skills extends Component<Props, State> {
       <div id="Skills" className='snap-to'>
         {/* eslint-disable-next-line*/}
         <p className="comment">// Skills</p>
+        {/* TODO Core skills and minor skills */}
         <div id="skillBadges">
             {skillDivs}
         </div>
