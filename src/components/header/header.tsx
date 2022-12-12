@@ -13,7 +13,7 @@ export default class header extends Component<Props, State> {
 
   render() {
     return (
-      <nav className='main-nav'>
+      <nav id='main-nav'>
         <ul id='inpage-links'>
           <li><a href='#Home'>Home</a></li>
           <li><a href='#About'>About</a></li>
