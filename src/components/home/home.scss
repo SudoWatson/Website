@@ -1,0 +1,47 @@
+#Home {
+    height: 100vh;
+    margin: auto;
+
+
+    .center {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+
+    #HeaderImage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 99vw;
+        height: 101vh;
+        z-index: -1;
+        opacity: 0.2;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.social-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+        display: inline;
+        a {
+            margin: 10px;
+            text-decoration: none;
+            height: 100px;
+        }
+    }
+}
+
+
+.material-symbols-outlined.expand_more {
+    position: relative;
+    top: 425%;
+    font-size: 5rem;
+}
