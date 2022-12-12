@@ -3,11 +3,19 @@
 const projects: ProjectData[] = [
 	{
 		title: "Template",
-		imgPath: "/imgs/projects/thumbnail.png",
+		imgPath: "/imgs/projects/thumbnail-700x525.png",
 		desc: "Description",
 		repoURL: "UNAVAILABLE-NOREPO",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Tags", "Go", "Here"],
+	},
+	{
+		title: "Portfolio Website",
+		imgPath: "/imgs/projects/portfolio.png",
+		desc: "Developed using TypeScript, React, and a bit of Bootstrap this website you're looking at right now is where I put whatever I want to showcase towards my career. The website is built completely from scratch by myself and hosted on a cloud server. Any projects that I want to showcase are shown here, as well as any skills that I have. There's also an easy way to contact me at the bottom of the page.",
+		repoURL: "https://github.com/SudoWatson/Website",
+		demoURL: "UNAVAILABLE-PORTFOLIO",
+		tags: ["HTML", "TypeScript", "React", "Node.js"],
 	},
 	{
 		title: "Chess Clone",

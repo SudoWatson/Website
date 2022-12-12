@@ -30,6 +30,10 @@ export default class projectButton extends Component<Props, State> {
 				case "UNAVAILABLE":
 					disabled = true;
 					break;
+				case "UNAVAILABLE-PORTFOLIO":
+					disabled = true;
+					errMsg = "Woah, you're already looking at it buddy :)";
+					break;
 				case "UNAVAILABLE-NOLIVE":
 					disabled = true;
 					errMsg =
