@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './about.css';
 
-const BBCPU_IMG_PATH = process.env.PUBLIC_URL + '/imgs/breadboardCPU.jpg';
+const BBCPU_IMG_PATH = process.env.PUBLIC_URL + '/imgs/projects/breadboardCPU.jpg';
 
 type Props = {};
 
