@@ -22,6 +22,7 @@ export default class contact extends Component<Props, State> {
 		};
 
 		this.submitForm = this.submitForm.bind(this);
+		this.clearForm = this.clearForm.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
@@ -84,35 +85,55 @@ export default class contact extends Component<Props, State> {
 	 * Handles sending an email when contact form is submitted
 	 */
 	submitForm(e: any) {
+		// Darkens and disables the submit button until finished
 		e.preventDefault();
 		let submitButton = document.getElementById("submit-contact");
 		if (submitButton) {
 			submitButton.setAttribute("disabled", "disabled");
 			submitButton.innerHTML = "Submitting...";
 		}
-		// Have to use the ||'' because typescript thinks it's undefined
+		// Sends an email using EmailJS
 		send(
+		// Have to use the || "" because typescript thinks it's undefined
 			process.env.REACT_APP_SERVICE_ID || "",
 			process.env.REACT_APP_TEMPLATE_ID || "",
 			this.state,
 			process.env.REACT_APP_USER_ID || ""
 		)
 			.then((response) => {
-				console.log("SUCCESS!", response.status, response.text);
+				// Email sent successfully
 				alert("Email sent!");
+				this.clearForm(e.target);
 			})
 			.catch((err) => {
-				console.log("FAILED...", err);
+				// Email failed
+				console.error("FAILED...", err);
 				alert(
 					"There was an issuing contacting me. Please try again later, or just send me an email at aulennert@gmail.com"
 				);
 			})
 			.finally(() => {
+				// Reactivate submit button
 				if (submitButton) {
 					submitButton.removeAttribute("disabled");
 					submitButton.innerHTML = "Submit";
 				}
 			});
+	}
+
+	/**
+	 * Clears all input fields from a given form
+	 * @param form - Form element to clear
+	 */
+	clearForm(form: HTMLFormElement) {
+		//TODO Clear the form
+		let inputs = form.getElementsByTagName("input");
+		let textAreas = form.getElementsByTagName("textarea");
+		let inputElements = [...inputs, ...textAreas];
+
+		for (let element of inputElements) {
+			element.value = "";
+		}
 	}
 
 	/**
@@ -141,7 +162,5 @@ export default class contact extends Component<Props, State> {
 				...this.state,
 				[field]: e.target.value || blankValue,
 			});
-		console.log(this.state);
-		console.log(e.target.value);
 	}
 }
