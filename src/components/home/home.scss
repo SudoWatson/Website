@@ -40,8 +40,11 @@
 }
 
 
-.material-symbols-outlined.expand_more {
-    position: relative;
-    top: 425%;
-    font-size: 5rem;
+#scrollDownArrow {
+    position: absolute;
+    top: 85vh;
+    
+    span {
+        font-size: 5rem;
+    }
 }
