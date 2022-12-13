@@ -13,5 +13,6 @@ interface ProjectData {
     desc: string,
     repoURL: string,
     demoURL: string,
-    tags: string[]
+    tags: string[],
+    key: number,
 };

@@ -1,4 +1,5 @@
 // TODO Turn these data scripts into database tables
+let i = 0;
 
 const projects: ProjectData[] = [
 	{
@@ -8,6 +9,7 @@ const projects: ProjectData[] = [
 		repoURL: "UNAVAILABLE-NOREPO",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Tags", "Go", "Here"],
+		key: i++,
 	},
 	{
 		title: "Portfolio Website",
@@ -16,6 +18,7 @@ const projects: ProjectData[] = [
 		repoURL: "https://github.com/SudoWatson/Website",
 		demoURL: "UNAVAILABLE-PORTFOLIO",
 		tags: ["HTML", "TypeScript", "React", "Node.js"],
+		key: i++,
 	},
 	{
 		title: "Chess Clone",
@@ -24,6 +27,7 @@ const projects: ProjectData[] = [
 		repoURL: "https://github.com/SudoWatson/Chess",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Java", "Processing", "OOP"],
+		key: i++,
 	},
 	{
 		title: "Sandbox \"Game\"",
@@ -32,6 +36,7 @@ const projects: ProjectData[] = [
 		repoURL: "https://github.com/SudoWatson/SandboxGame",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Java", "LWJGL", "OOP", "Shaders", "Python", "3D Graphics", "Animation", "XML", "File Formats"],
+		key: i++,
 	},
 ];
 
