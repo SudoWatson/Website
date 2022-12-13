@@ -73,34 +73,43 @@ $thumbnailZoom: scale(1.025);
 
     #popupContent {
         height: 100%;
-    }
 
-    #projectTags {
-        //grid-column: 2;
-        //grid-row: tags;
-
-        margin: 1rem;
-        height: 5rem;
-        font-size: smaller;
-        
-        p {
-            color: #D0D0D0;
+        div {
+            height: 100%;
         }
-    }
+        
+        #projectTags {
+            //grid-column: 2;
+            //grid-row: tags;
 
-    #aboutProject {
-        margin: 0 1em;
-        height: 60%;
-    }
+            margin: 1rem;
+            height: 5rem;
+            font-size: smaller;
+            
+            p {
+                color: #D0D0D0;
+            }
+        }
 
-    #buttons {
-        margin: 1rem;
-        //grid-column: 2;
-        //grid-row: buttons;
+        #aboutProject {
+            margin: 0 1em;
+            height: 60%;
 
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+            div {
+                height: 100%;
+                overflow: auto;
+            }
+        }
+
+        #buttons {
+            margin: 1rem;
+            //grid-column: 2;
+            //grid-row: buttons;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
     }
 }
 
