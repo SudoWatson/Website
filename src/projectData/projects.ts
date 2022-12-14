@@ -23,7 +23,7 @@ const projects: ProjectData[] = [
 	{
 		title: "Chess Clone",
 		imgPath: "/imgs/projects/chessThumbnail.png",
-		desc: "A clone of the famous board game Chess! Implemeted in Java using the Processing library for the graphical interface, 2 people can take turns playing against each other capaturing opponent pieces. I have only written this project in Java currently, so there isn't a live version available at the moment. But check back in the future as I plan on porting a live version! Click the 'Code' button in the bottom-right to view the repository of this project",
+		desc: "A clone of the famous board game Chess! Implemented in Java using the Processing library for the graphical interface, 2 people can take turns playing against each other capaturing opponent pieces. I have only written this project in Java currently, so there isn't a live version available at the moment. But check back in the future as I plan on porting a live version! Click the 'Code' button in the bottom-right to view the repository of this project",
 		repoURL: "https://github.com/SudoWatson/Chess",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Java", "Processing", "OOP"],
@@ -32,7 +32,7 @@ const projects: ProjectData[] = [
 	{
 		title: "Sandbox \"Game\"",
 		imgPath: "/imgs/projects/sandboxGame.png",
-		desc: "This is a project I made for an independant study software development course I took in high school. After finishing the tw0 semester's of software development courses in one quarter, I took did an independant study for the remaining quarter. I developed a week-by-week plan of what I wanted to accomplish in each week. I decided to learn from an online series on game development. Developed in Java with the Light Weight Java Graphics Library(LWJGL, a Java implementation of OpenGL), I implementated very basics of 3D graphics and game development concepts. While it's not an actual game, it allowed me to learn the implementation of 3D graphics and game development techniques. You can read more about it by viewing the GitHub repository.",
+		desc: "This is a project I made for an independant study software development course I took in high school. After finishing the two semester's of software development courses in one quarter, I took an independant study for the remaining quarter. I developed a week-by-week plan of what I wanted to accomplish in each week. I decided to learn from an online series on game development. Developed in Java with the Light Weight Java Graphics Library(LWJGL, a Java implementation of OpenGL), I implemented very basics of 3D graphics and game development concepts. While it's not an actual game, it allowed me to learn the implementation of 3D graphics and game development techniques. You can read more about it by viewing the GitHub repository.",
 		repoURL: "https://github.com/SudoWatson/SandboxGame",
 		demoURL: "UNAVAILABLE-NOLIVE",
 		tags: ["Java", "LWJGL", "OOP", "Shaders", "Python", "3D Graphics", "Animation", "XML", "File Formats"],
