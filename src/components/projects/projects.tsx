@@ -21,14 +21,14 @@ export default class projects extends Component<Props, State> {
     })
 
     return (
-        <>
-      <div id='Projects' className='snap-to'>
-        {/* eslint-disable-next-line*/}
-        <p className="comment">// Projects</p>
-        <div id="projectContainer">
-            {projectDivs}
+      <>
+        <div id='Projects' className='snap-to'>
+          {/* eslint-disable-next-line*/}
+          <p className="comment">// Projects - Click on one to read more</p>
+          <div id="projectContainer">
+              {projectDivs}
+          </div>
         </div>
-      </div>
       </>
     )
   }

@@ -26,3 +26,16 @@ div:has(*:is(input, textarea):required) > label::after {
 	content: " *";
 	color: red;
 }
+
+#mobileWarning {
+	display: none;
+}
+
+@media only screen and (max-width: 768px) {
+	#mobileWarning {
+		display: block;
+		span {
+			color: red;
+		}
+	}
+}

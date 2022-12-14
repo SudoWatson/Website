@@ -6,4 +6,5 @@
  interface SkillData {
     imageURL?: string,
     name?: string,
+    key: number,
 };
