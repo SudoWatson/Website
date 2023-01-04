@@ -22,7 +22,7 @@ export default class about extends Component<Props, State> {
           on the way. I am continuously exposing myself to new technologies, am ever curious to expand my knowledge in every facet of software, and am always eager
           to learn something new!
         </p>
-        <img id="bbimg" src={BBCPU_IMG_PATH} alt="An image of the breadboard computer I built, more on this coming soon" />
+        {/* <img id="bbimg" src={BBCPU_IMG_PATH} alt="The breadboard computer I built, more on this coming soon" /> */}
         </div>
       </div>
     )
