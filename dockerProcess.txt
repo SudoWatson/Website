@@ -1,0 +1,9 @@
+Build process:
+
+docker build -t sudowatson/portfolio .              # This allows for a latest tag
+docker tag sudowatson/portfolio:versionOrOtherTag   # This allows for a version tag
+docker login                                        # May or may not be needed
+docker push -a sudowatson/portfolio                 # This pushes all tags to dockerhub
+
+Run update process is simple, just call run with the repo name?
+docker run -p 3000:3000 sudowatson/portfolio        # -p for port matching
