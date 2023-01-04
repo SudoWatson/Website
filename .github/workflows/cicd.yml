@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: sudowatson/portfolio:latest,sudowatson/portfolio:${{ github.ref }}
+          tags: sudowatson/portfolio:latest,sudowatson/portfolio:${{ github.ref_name }}
