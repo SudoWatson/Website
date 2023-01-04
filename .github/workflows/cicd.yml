@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   genVer:  # Generates a semantic versioning number to apply to docker image and nodejs package
