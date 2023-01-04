@@ -1,0 +1,17 @@
+name: Verify PR
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+ 
+  checkLabels:  # Checks to ensure at least 1 version label is applied to PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require Labels
+        uses: mheap/github-action-required-labels@v3
+        with:
+          labels: patch,minor,major
+          mode: minimum
+          count: 1
