@@ -93,21 +93,22 @@ export default class contact extends Component<Props, State> {
 			submitButton.innerHTML = "Submitting...";
 		}
 		// Sends an email using EmailJS
-		send(
-		// Have to use the || "" because typescript thinks it's undefined
-			process.env.REACT_APP_SERVICE_ID || "",
-			process.env.REACT_APP_TEMPLATE_ID || "",
-			this.state,
-			process.env.REACT_APP_USER_ID || ""
-		)
+		try {
+			send(
+			// Have to use the || "" because typescript thinks it's undefined
+				process.env.REACT_APP_SERVICE_ID || "",
+				process.env.REACT_APP_TEMPLATE_ID || "",
+				this.state,
+				process.env.REACT_APP_USER_ID || ""
+			)
 			.then((response) => {
 				// Email sent successfully
 				alert("Email sent!");
 				this.clearForm(e.target);
 			})
-			.catch((err) => {
+			.catch((err2) => {
 				// Email failed
-				console.error("FAILED...", err);
+				console.error("FAILED...", err2);
 				alert(
 					"There was an issuing contacting me. Please try again later, or just send me an email at aulennert@gmail.com"
 				);
@@ -119,6 +120,13 @@ export default class contact extends Component<Props, State> {
 					submitButton.innerHTML = "Submit";
 				}
 			});
+		} catch (err) {
+			// Email failed
+			console.error("FAILED...", err);
+			alert(
+				"There was an issuing contacting me. Please try again later, or just send me an email at aulennert@gmail.com"
+			);
+		}
 	}
 
 	/**
