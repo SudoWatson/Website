@@ -1,0 +1,15 @@
+TODO
+
+MINIMUM FOR v2.0.0
+Create an express app
+Create a .env with NODE_ENV set to 'development'
+NODE_ENV should be 'production' on server and for testing production ready
+If in 'development' then the home page should proxy to the hosted react server
+If in 'production' then the home page should use the build folder
+Modify docker file to work with this
+
+EXTRA FOR v2.1.0
+Add a .php file to send an email to me
+When post to /email route to .php
+Remove emailjs
+When submitting form, post to /email instead of running emailjs stuff
