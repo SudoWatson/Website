@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
   let proxy = require("http-proxy-middleware");
 
   app.use('/', proxy.createProxyMiddleware({
-    target:"http://localhost:3000",
+    target:"http://127.0.0.1:3000",
     changeOrigin: true
   }));
   
