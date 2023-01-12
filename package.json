@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start-dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "start-prod": "cd server && npm run start",
     "build": "cd client && npm run build",
     "install-packages": "npm install && concurrently \"cd client && npm install\" \"cd server && npm install\""
   },

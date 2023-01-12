@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 
 // Load .env
 import dotenv from 'dotenv';
+import path from 'path';
 dotenv.config({path: '../.env'});
 
 // Create Server
@@ -17,6 +18,7 @@ const port = process.env.PORT;
 // ---=== ROUTES ===--- \\
 
 if (process.env.NODE_ENV === "development") {
+  // If in development, proxy '/' to the hosted React server
   let proxy = require("http-proxy-middleware");
 
   app.use('/', proxy.createProxyMiddleware({
@@ -25,10 +27,9 @@ if (process.env.NODE_ENV === "development") {
   }));
   
 } else {
-  // TODO Direct to build path
-  app.get('/', (req, res) => {
-    res.send('<h1>Not in dev mode</h1>')
-  })
+  // If in production, serve build path
+  let reactPath = path.join("..", process.env.CLIENT_BUILD_PATH);
+  app.use(express.static(reactPath));
 }
 
 app.post('/email', (req: Request, res: Response) => {
