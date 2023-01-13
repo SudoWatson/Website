@@ -32,8 +32,6 @@ if (process.env.NODE_ENV === "development") {
   console.log("Running in PRODUCTION mode");
   // If in production, serve build path
   let reactPath = path.join("..", process.env.CLIENT_BUILD_PATH);
-  console.log(reactPath);
-  
   app.use('/', express.static(reactPath));
 }
 

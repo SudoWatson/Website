@@ -6,4 +6,4 @@ docker login                                        # May or may not be needed
 docker push -a sudowatson/portfolio                 # This pushes all tags to dockerhub
 
 Run update process is simple, just call run with the repo name?
-docker run -p 3000:3000 sudowatson/portfolio        # -p for port matching
+docker run -p 3000:3000 --env-file .envlocation sudowatson/portfolio        # -p for port matching
