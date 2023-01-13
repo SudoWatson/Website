@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "start-dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
-    "start-prod": "cd server && npm run start",
-    "build": "cd client && npm run build",
+    "start-prod": "cd server && node app.js",
+    "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "install-packages": "npm install && concurrently \"cd client && npm install\" \"cd server && npm install\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SudoWatson/Website.git"
   },
-  "devDependencies": {
-    "concurrently": "^7.6.0"
-  },
-  "dependencies": {}
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
 }

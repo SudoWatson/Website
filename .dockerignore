@@ -1,8 +1,14 @@
 **/node_modules
 **/build
+**/dist
 
 **/*.css
 **/*.css.map
 
+**/*.env
+
+.git
 .github
 .gitignore
+.dockerignore
+Dockerfile

@@ -18,6 +18,8 @@ const port = process.env.PORT;
 // ---=== ROUTES ===--- \\
 
 if (process.env.NODE_ENV === "development") {
+  console.log("Running in DEVELOPMENT mode");
+  
   // If in development, proxy '/' to the hosted React server
   let proxy = require("http-proxy-middleware");
 
@@ -27,9 +29,12 @@ if (process.env.NODE_ENV === "development") {
   }));
   
 } else {
+  console.log("Running in PRODUCTION mode");
   // If in production, serve build path
   let reactPath = path.join("..", process.env.CLIENT_BUILD_PATH);
-  app.use(express.static(reactPath));
+  console.log(reactPath);
+  
+  app.use('/', express.static(reactPath));
 }
 
 app.post('/email', (req: Request, res: Response) => {
