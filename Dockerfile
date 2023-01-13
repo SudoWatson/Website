@@ -34,7 +34,7 @@ RUN sass .
 RUN npm run build
 
 # Move built apps
-RUN cp -r ./server/dist/. ../build/server
+RUN cp -r ./server/. ../build/server
 RUN cp -r ./client/build/. ../build/client
 
 WORKDIR /app

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon .\\app.ts",
-    "build": "npx tsc --rootDir . --outDir ./dist"
+    "dev": "nodemon ./app.ts",
+    "start": "npx ts-node ./app.ts",
+    "build": "echo \"No Build for Back-End\""
   },
   "dependencies": {
     "dotenv": "^16.0.3",
