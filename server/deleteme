@@ -1,0 +1,7 @@
+TODO
+
+EXTRA FOR v2.1.0
+Add a .php file to send an email to me
+When post to /email route to .php
+Remove emailjs
+When submitting form, post to /email instead of running emailjs stuff

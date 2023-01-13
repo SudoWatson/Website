@@ -7,7 +7,7 @@ npm-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Dependency directories
-/node_modules
+node_modules
 
 # TypeScript cache
 *.tsbuildinfo
@@ -22,9 +22,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-/public/css/*.css
-/public/css/*.css.map
-
 *.js
 
 .vscode
@@ -38,7 +35,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /coverage
 
 # production
-/build
+build
+dist
 
 # misc
 .DS_Store
