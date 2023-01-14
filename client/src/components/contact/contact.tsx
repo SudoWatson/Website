@@ -95,11 +95,10 @@ export default class contact extends Component<Props, State> {
 		// Sends an email using EmailJS
 		try {
 			send(
-			// Have to use the || "" because typescript thinks it's undefined
-				process.env.REACT_APP_SERVICE_ID || "",
-				process.env.REACT_APP_TEMPLATE_ID || "",
+				"service_gk0juih",
+				"template_hwn8aq6",
 				this.state,
-				process.env.REACT_APP_USER_ID || ""
+				"6SRPpJOOu8isKZdqf"
 			)
 			.then((response) => {
 				// Email sent successfully
