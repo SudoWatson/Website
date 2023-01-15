@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hosted at [austinlennert.dev](https://austinlennert.dev)
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+- [Built With](#built-with)
+- [Features](#features)
+- [Acknowledgements](#acknowledgements)
+- [Changelog](#changelog)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This website was developed to be my portfolio through my Software Development career. It shows off a few of my favorite projects I've worked on, several skills I have, and a way to contact me. Each project sections contains a small description, a link to its GitHub repository, and a link to the site if applicable. This project is by far the largest and most complete one I've worked on, and it has been an amazing project to work on and one I will continue to flesh out as time goes on. Additionally, this project has been used to teach myself a load of new-to-me technologies such as Docker, GitHub Actions, React, etc.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Built With
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React for the front-end, Express for the back-end. All contained inside of a Docker container. Programmed in TypeScript. GitHub actions automatically builds and pushes a Docker image upon updating the website.
 
-### `npm run build`
+## Skills
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+TypeScript, React, Express, Node.js, GitHub Actions, Docker, Docker-Compose, Servers
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Built entirely from scratch
+- React front-end
+- Express back-end
+- List of projects with links to code
+- List of skills
+- Contact form
+- Auto building Docker images upon update
+- Automatically reload website when newer image is available
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
