@@ -12,6 +12,6 @@ jobs:
       - name: Require Labels
         uses: mheap/github-action-required-labels@v3
         with:
-          labels: patch,minor,major
+          labels: patch,minor,major,no-version-needed
           mode: minimum
           count: 1

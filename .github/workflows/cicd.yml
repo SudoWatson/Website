@@ -11,6 +11,7 @@ jobs:
     outputs:
       version: ${{ steps.nextVer.outputs.version }}
       verNum: ${{ steps.nextVer.outputs.verNum  }}
+      status: ${{ steps.nextVer.outputs.status  }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,10 +54,15 @@ jobs:
             echo "verNum=${{ steps.semvers.outputs.major }}" >> $GITHUB_OUTPUT
             echo "version=${{ steps.semvers.outputs.v_major }}"
           fi
+          if ${{ contains(steps.PR.outputs.labels, 'no-version-needed') }}; then
+            echo "status=no-tag" >> $GITHUB_OUTPUT
+            echo "No tag needed"
+          fi
  
   build:  # Builds and pushes a docker image to DockerHub
     runs-on: ubuntu-latest
     needs: genVer
+    if: "!contains(needs.genVer.outputs.status, 'no-tag'"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -83,6 +89,7 @@ jobs:
   tagCommit:  # Tags the last commit with the newest tag version
     runs-on: ubuntu-latest
     needs: genVer
+    if: "!contains(needs.genVer.outputs.status, 'no-tag'"
     steps:
       - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
