@@ -72,7 +72,7 @@ export default class project extends Component<Props, State> {
 									</h2>
 									<div id="projectTags" className="row">
 										<div className="col">
-											<h5>Relavent Skills</h5>
+											<h5>Relevent Skills</h5>
 											<p>&#123;{this.props.tags.join(", ")}&#125;</p>
 										</div>
 									</div>
