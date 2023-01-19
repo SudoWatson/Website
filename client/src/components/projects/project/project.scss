@@ -26,6 +26,9 @@ $thumbnailZoom: scale(1.025);
 
         &:hover {
             transform: $thumbnailZoom;
+            @media #{$media-mobile} {
+                transform: none;
+            }
         }
     }
 
@@ -103,10 +106,6 @@ $thumbnailZoom: scale(1.025);
                 padding: 5% 5% 0;
 
             }
-        }
-
-        @media #{$media-mobile} {
-           
         }
         
         @media #{$media-mobile} {
