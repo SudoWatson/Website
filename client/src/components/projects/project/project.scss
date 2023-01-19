@@ -1,3 +1,5 @@
+@import "../../../vars";
+
 $thumbnailZoom: scale(1.025);
 
 #ProjectThumbnail {
@@ -9,6 +11,13 @@ $thumbnailZoom: scale(1.025);
     filter: drop-shadow(0px 6px 3px black);
 
     cursor: pointer;
+
+    
+    @media #{$media-mobile} {
+        width: 80%;
+        height: 52vw;
+        margin: 1rem;
+    }
 
     img {
         width: 100%;
@@ -32,6 +41,15 @@ $thumbnailZoom: scale(1.025);
         text-justify: center;
         
         pointer-events: none;
+
+        
+        @media #{$media-mobile} {
+            font-size: 16px;
+            padding: 5px 0;
+            left: 3px;
+            width: 98%;
+            bottom: 2rem;
+        }
     }
 }
 
@@ -49,9 +67,11 @@ $thumbnailZoom: scale(1.025);
 
     z-index: 1000;
 
-    // display: grid;
-    // grid-template-columns: 60% 40%; 
-    // grid-template-rows: [title] 10% [tags] 15% [about] auto [buttons] 10%;
+    
+    @media #{$media-mobile} {
+        width: 70vw;
+        height: 70vh;
+    }
 
     .no-padding {
         padding: 0;
@@ -76,6 +96,59 @@ $thumbnailZoom: scale(1.025);
 
         div {
             height: 100%;
+            
+            @media #{$media-mobile} {
+                width: 90%;
+                height: fit-content;
+                padding: 5% 5% 0;
+
+            }
+        }
+
+        @media #{$media-mobile} {
+           
+        }
+        
+        @media #{$media-mobile} {
+            display: static;
+
+            #projectPopupContent {
+                padding: 0;
+                margin: 0;
+                width: auto;
+                height: auto;
+                div {
+                    margin: 0;
+                }
+                #title {
+                    font-size: larger;
+                }
+
+                #projectTags {
+                    padding: 0;
+                    height: fit-content;
+                    h5 {
+                        font-size: medium;
+                    }
+                    P {
+                        font-size: 10px;
+                        padding: 0;
+                    }
+                }
+
+                #aboutProject {
+                    height: 200px;
+                    padding: 0;
+                    h3 {
+                        font-size: medium;
+                    }
+                    p {
+                        height: 100%;
+                        font-size: 10px;
+                        overflow: auto;
+                    }
+                }
+            }
         }
         
         #projectTags {
@@ -123,6 +196,11 @@ $thumbnailZoom: scale(1.025);
     &:hover {
         cursor: pointer;
     }
+
+    
+    @media #{$media-mobile} {
+        font-size: small;
+    }
 }
 
 .material-symbols-outlined {
@@ -139,7 +217,7 @@ $thumbnailZoom: scale(1.025);
     z-index: 900;
 
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
 
     background-color: black;
     opacity: 0.75;
