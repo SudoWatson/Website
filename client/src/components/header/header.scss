@@ -24,6 +24,9 @@
         
         &.social-links {
             padding-right: 1%;
+            @media #{$media-mobile} {
+                display: none;
+            }
         }
         li {
             display: inline;
