@@ -1,6 +1,10 @@
+@import "../../vars";
+
 #Skills {
     #skillBadges {
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-around;
     }
 }

@@ -16,26 +16,13 @@ body {
 }
 
 p.comment {
-	margin: 0 10px;
+	margin: 30px 10px 2px;
 	color: #7f858f;
-	font-weight: bol;
+	font-weight: bold;
 }
 
 // Add an '*' after a required input field
 div:has(*:is(input, textarea):required) > label::after {
 	content: " *";
 	color: red;
-}
-
-#mobileWarning {
-	display: none;
-}
-
-@media only screen and (max-width: 768px) {
-	#mobileWarning {
-		display: block;
-		span {
-			color: red;
-		}
-	}
 }

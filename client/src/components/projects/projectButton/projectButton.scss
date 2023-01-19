@@ -1,5 +1,11 @@
+@import "../../../vars";
+
 .project-button {
 
+    @media #{$media-mobile} {
+        display: none;
+    }
+    
     a {
         text-decoration: none;
         

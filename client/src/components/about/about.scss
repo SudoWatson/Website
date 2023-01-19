@@ -1,3 +1,5 @@
+@import "../../vars";
+
 #About {
     height: fit-content;
     margin-bottom: 10rem;
@@ -8,11 +10,21 @@
         display: flex;
         justify-content: space-around;
 
+        @media #{$media-mobile} {
+            padding: 10px;
+        }
+
+
         #aboutMe {
             width: 53%;
             font-size: 2rem;
             line-height: 3rem;
-            text-align: center;
+            text-align: left;
+
+            @media #{$media-mobile} {
+                font-size: 16px;
+                width: 100%;
+            }
         }
 
         #bbimg {

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { isMobile } from "react-device-detect";
 
 import "./project.css";
 
@@ -44,7 +45,7 @@ export default class project extends Component<Props, State> {
 						onMouseOver={this.onMouseOver}
 						onMouseLeave={this.onMouseLeave}
 					/>
-					{this.state.isHovering && (
+					{(this.state.isHovering || isMobile) && (
 						<p id="thumbnailTitle">{this.props.title}</p>
 					)}
 				</div>
@@ -59,14 +60,14 @@ export default class project extends Component<Props, State> {
 							</h4>
 
 							<div id="popupContent" className="row">
-								<div className="col-7 no-padding">
+								<div id="projectPopupImage" className="col-7 no-padding">
 									<img
 										src={this.props.imgPath}
 										alt="Project Thumbnail"
 									/>
 								</div>
 
-								<div className="col-5">
+								<div id="projectPopupContent" className="col-5">
 									<h2 id="title" className="row">
 										{this.props.title}
 									</h2>

@@ -1,6 +1,32 @@
+@import "../../vars";
+
 #Contact {
+
+  div {
+    @media #{$media-mobile} {
+      display: inline;
+      div {
+        margin: 10px 0;
+        padding: 0;
+      }
+    }
+  }
+  #formWrapper {
+    @media #{$media-mobile} {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+  }
   input, textarea, button {
     margin: 0.5rem 0;
+    
+    @media #{$media-mobile} {
+      margin: 0;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
   }
 
   textarea {

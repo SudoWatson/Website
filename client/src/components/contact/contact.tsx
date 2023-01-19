@@ -32,7 +32,7 @@ export default class contact extends Component<Props, State> {
 				{/* eslint-disable-next-line*/}
 				<p className="comment">// Contact Me</p>
 				<div className="row">
-					<div className="col-6 offset-3">
+					<div id="formWrapper" className="col-6 offset-3">
 						<form id="contact-form" onSubmit={this.submitForm}>
 							<div className="row">
 								<div className="col-5">

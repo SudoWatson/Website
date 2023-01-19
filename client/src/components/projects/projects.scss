@@ -1,3 +1,5 @@
+@import "../../vars";
+
 #projectContainer {
     margin: 2rem 10rem;
     margin-bottom: 10rem;
@@ -6,4 +8,11 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-content: space-between;
+
+    
+    @media #{$media-mobile} {
+        margin: auto;
+        flex-flow: column;
+        align-items: center;
+    }
 }

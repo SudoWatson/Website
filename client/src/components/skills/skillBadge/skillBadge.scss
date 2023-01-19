@@ -1,10 +1,26 @@
+@import "../../../vars";
+
 .skill-badge {
     text-align: center;
     padding: 1rem;
+
+    @media #{$media-mobile} {
+        font-size: 10px;
+        padding: 0 10px;
+    }
 
     img {
         width: 75px;
         height: 75px;
         object-fit: contain;
+
+        
+        @media #{$media-mobile} {
+            width: 35px;
+            height: 35px;
+        }
+    }
+    p {
+        padding-top: 5px;
     }
 }
