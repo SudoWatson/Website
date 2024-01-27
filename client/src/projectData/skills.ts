@@ -35,6 +35,16 @@ const skills: SkillData[] = [
 		imageURL: "/imgs/skills/Git-Icon.png",
 		key: i++,
 	},
+	{
+		name: "C#",
+		imageURL: "/imgs/skills/CSharp-Logo.png",
+		key: i++,
+	},
+	{
+		name: "Blazor",
+		imageURL: "/imgs/skills/Blazor-Logo.png",
+		key: i++,
+	},
 ];
 
 export default skills;
