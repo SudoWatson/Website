@@ -14,8 +14,8 @@ export default class home extends Component<Props, State> {
         return (
             <div id="Home">
                 <div className='center'>
-                    <h1>Hi, I'm Austin Lennert</h1>
-                    < Links />
+                    <h1 className="typewriter">Hi, I'm Austin Lennert!</h1>
+                    <Links />
                     <a id="scrollDownArrow" href="#About"><span className="material-symbols-outlined expand_more">expand_more</span></a>
                 </div>
                 <img src="/imgs/stars.jpg" id="HeaderImage" alt="" />  {/* TODO Change this to something cooler and more programmy */}
