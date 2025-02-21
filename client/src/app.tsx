@@ -15,17 +15,17 @@ import Contact from "./components/contact/contact";
 import Footer from "./components/footer/footer";
 
 export default function App() {
-	return (
-		<div>
-			<Home />
-			<Header />
-			<div className="container-fluid">
-				<About />
-				<Skills />
-				<Projects />
-				<Contact />
-			</div>
-			<Footer />
-		</div>
-	);
+    return (
+        <div>
+            <Home />
+            <Header />
+            <div className="container-fluid">
+                <About />
+                <Skills />
+                <Projects />
+                <Contact />
+            </div>
+            <Footer />
+        </div>
+    );
 }
