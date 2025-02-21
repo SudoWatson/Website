@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './links.css';
 
-const GH_LOGO_PATH = process.env.PUBLIC_URL + '/imgs/GitHub-Mark-32px.png';
+const GH_LOGO_PATH = process.env.PUBLIC_URL + '/imgs/github-mark-white.png';
 const LI_LOGO_PATH = process.env.PUBLIC_URL + '/imgs/linkedin.png';
 
 type Props = {};
