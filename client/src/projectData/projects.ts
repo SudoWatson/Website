@@ -1,5 +1,5 @@
 import { projectButtonURLStatus } from "../components/projects/projectButton/projectButton"
-// TODO Turn these data scripts into database tables
+// TODO: Turn these data scripts into database tables
 let i = 0;
 
 const projects: ProjectData[] = [

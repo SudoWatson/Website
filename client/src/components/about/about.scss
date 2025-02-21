@@ -20,6 +20,7 @@
             font-size: 2rem;
             line-height: 3rem;
             text-align: left;
+            color: #EEE;
 
             @media #{$media-mobile} {
                 font-size: 16px;
@@ -30,6 +31,22 @@
         #bbimg {
             width: 30%;
             object-fit: cover;
+        }
+
+        .code {
+            color: #CCC;
+            font-family: monospace;
+            background: #333;
+        }
+        .code.list {
+            &::before { content: '{'; color: #dd7878; }
+            &::after { content: '}'; color: #dd7878; }
+        }
+
+        .string{
+            color: #a6e3a1;
+            &::before { content: '"'; }
+            &::after { content: '"'; }
         }
     }
 

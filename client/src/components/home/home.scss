@@ -2,7 +2,6 @@
     height: 100vh;
     margin: auto;
 
-
     .center {
         display: flex;
         height: 100%;
@@ -24,13 +23,44 @@
     }
 }
 
+$rightPadding: 4px;
+.typewriter {
+    font-family: monospace, monospace;
+    overflow: hidden;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    margin: 0 auto;
+    width: 0;
+    animation:
+        expand 3s steps(23, end) 1s,
+        blink-cursor 0.75s step-end infinite;
+    animation-fill-mode: forwards;
+
+    @keyframes expand {
+        from {
+            width: $rightPadding;
+            padding-right: $rightPadding;
+        }
+        to {
+            width: calc(23ch + $rightPadding);
+            padding-right: $rightPadding;
+        }
+    }
+    @keyframes blink-cursor {
+        from {border-right-color: transparent;}
+        50% {border-right-color: white;}
+        to {border-right-color: transparent;}
+    }
+}
+
 .social-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    
+
     li {
         display: inline;
+
         a {
             margin: 10px;
             text-decoration: none;
@@ -41,10 +71,30 @@
 
 
 #scrollDownArrow {
-    position: absolute;
-    top: 85vh;
-    
     span {
         font-size: 5rem;
+    }
+
+    position: absolute;
+    top: 85vh;
+
+    animation: pushDown 11s infinite;
+    animation-delay: 5s;
+    @keyframes pushDown {
+        from {
+            transform: translateY(0); /* Initial position */
+        }
+        3% {
+            transform: translateY(15px); /* Move to the right */
+        }
+        5% {
+            transform: translateY(0); /* Back to initial position */
+        }
+        8% {
+            transform: translateY(15px); /* Move to the right */
+        }
+        10% {
+            transform: translateY(0); /* Back to initial position */
+        }
     }
 }
