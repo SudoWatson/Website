@@ -11,25 +11,25 @@ type Props = {}
 type State = {}
 
 export default class skills extends Component<Props, State> {
-  state = {}
+    state = {}
 
-  render() {
-    // TODO Get this any outta here
-    const skillDivs: any[] = [];
+    render() {
+        // TODO Get this any outta here
+        const skillDivs: any[] = [];
 
-    skillsData.forEach((skill: SkillData) => {
-        skillDivs.push(<SkillBadge {...skill} />)
-    })
+        skillsData.forEach((skill: SkillData) => {
+            skillDivs.push(<SkillBadge {...skill} />)
+        })
 
-    return (
-      <div id="Skills" className='snap-to'>
-        {/* eslint-disable-next-line*/}
-        <p className="comment">// Skills</p>
-        {/* TODO Core skills and minor skills */}
-        <div id="skillBadges">
-            {skillDivs}
-        </div>
-      </div>
-    )
-  }
+        return (
+            <div id="Skills" className='snap-to'>
+                {/* eslint-disable-next-line*/}
+                <p className="comment">// Skills</p>
+                {/* TODO Core skills and minor skills */}
+                <div id="skillBadges">
+                    {skillDivs}
+                </div>
+            </div>
+        )
+    }
 }

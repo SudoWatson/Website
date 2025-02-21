@@ -12,24 +12,24 @@ type State = {};
 
 export default class projects extends Component<Props, State> {
 
-  render() {
-    // TODO Get this any outta here
-    const projectDivs: any[] = [];
+    render() {
+        // TODO Get this any outta here
+        const projectDivs: any[] = [];
 
-    projectData.forEach((proj: ProjectData) => {
-        projectDivs.push(<Project {...proj} />)
-    })
+        projectData.forEach((proj: ProjectData) => {
+            projectDivs.push(<Project {...proj} />)
+        })
 
-    return (
-      <>
-        <div id='Projects' className='snap-to'>
-          {/* eslint-disable-next-line*/}
-          <p className="comment">// Projects - Click on one to read more</p>
-          <div id="projectContainer">
-              {projectDivs}
-          </div>
-        </div>
-      </>
-    )
-  }
+        return (
+            <>
+                <div id='Projects' className='snap-to'>
+                    {/* eslint-disable-next-line*/}
+                    <p className="comment">// Projects - Click on one to read more</p>
+                    <div id="projectContainer">
+                        {projectDivs}
+                    </div>
+                </div>
+            </>
+        )
+    }
 }
