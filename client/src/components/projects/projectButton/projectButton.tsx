@@ -4,6 +4,7 @@ import "./projectButton.css";
 
 type Props = {
     url?: string;
+    /** Type of button this is */
     type: "Demo" | "Code";
 };
 
@@ -27,19 +28,19 @@ export default class projectButton extends Component<Props, State> {
             case null:
                 disabled = true;
                 break;
-            case "UNAVAILABLE":
+            case projectButtonURLStatus.UNAVAILABLE:
                 disabled = true;
                 break;
-            case "UNAVAILABLE-PORTFOLIO":
+            case projectButtonURLStatus.UNAVAILABLE_PORTFOLIO:
                 disabled = true;
-                errMsg = "Woah, you're already looking at it buddy :)";
+                errMsg = "Woah, you're already looking at it!";
                 break;
-            case "UNAVAILABLE-NOLIVE":
+            case projectButtonURLStatus.UNAVAILABLE_NOLIVE:
                 disabled = true;
                 errMsg =
                     "There is no live demo available for this project at the moment";
                 break;
-            case "UNAVAILABLE-NOREPO":
+            case projectButtonURLStatus.UNAVAILABLE_NOREPO:
                 disabled = true;
                 errMsg =
                     "There is no public code available for this project at the moment";
@@ -94,4 +95,11 @@ export default class projectButton extends Component<Props, State> {
     displayMsg() {
 
     }
+}
+
+export class projectButtonURLStatus {
+    static UNAVAILABLE: string = "UNAVAILABLE";
+    static UNAVAILABLE_PORTFOLIO: string = "UNAVAILABLE-PORTFOLIO";
+    static UNAVAILABLE_NOLIVE: string = "UNAVAILABLE-NOLIVE";
+    static UNAVAILABLE_NOREPO: string = "UNAVAILABLE-NOREPO";
 }

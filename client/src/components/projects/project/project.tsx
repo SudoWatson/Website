@@ -16,7 +16,7 @@ type State = {
     isHovering: boolean;
 };
 
-// TODO Project and Skill need to have a key
+// TODO: Project and Skill need to have a key
 export default class project extends Component<Props, State> {
     constructor(props: Props, state: State) {
         super(props, state);
@@ -32,7 +32,7 @@ export default class project extends Component<Props, State> {
     }
 
     render() {
-        // TODO Shadow still isn't lining up nicely
+        // TODO: Shadow still isn't lining up nicely
         if (this.props.title === "Template") return <></>
         return (
             <>
