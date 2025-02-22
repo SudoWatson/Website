@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 962.31 957.83">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #fff;
+        font-family: Flegrei-Regular, Flegrei;
+        font-size: 192.1px;
+      }
+    </style>
+  </defs>
+  <g>
+    <path d="M466.6,95.85L179.29,661.18h232.91l54.41-271.05,54.41,271.05h232.91L466.6,95.85ZM374.34,616.45h-108.44l174.76-209.92-66.32,209.92ZM372.06,415.33l94.55-186.03,94.55,186.03-94.55-55.48-94.55,55.48ZM492.54,406.53l174.76,209.92h-108.44l-66.32-209.92Z"/>
+    <circle cx="466.6" cy="311.84" r="19.62"/>
+  </g>
+  <text class="cls-1" transform="translate(166.47 819.04)"><tspan x="0" y="0">ustin</tspan></text>
+</svg>
