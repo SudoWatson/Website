@@ -22,6 +22,15 @@ const projects: ProjectData[] = [
         key: i++,
     },
     {
+        title: "16-Bit CPU Emulator",
+        imgPath: "/imgs/projects/thumbnail-700x525.png",
+        desc: "This is an \"emulator\" for a 16-Bit Computer I designed and am in the process of constructing with descrete logic chips. ",
+        repoURL: projectButtonURLStatus.UNAVAILABLE_NOREPO,
+        demoURL: projectButtonURLStatus.UNAVAILABLE_NOLIVE,
+        tags: ["C++", "Assembly", "CPU Architecture"],
+        key: i++,
+    },
+    {
         title: "Chess Clone",
         imgPath: "/imgs/projects/chessThumbnail.png",
         desc: "A clone of the famous board game Chess! Implemented in Java using the Processing library for the graphical interface, 2 people can take turns playing against each other capturing opponent pieces. I have only written this project in Java currently, so there isn't a live version available at the moment. But check back in the future as I plan on porting a live version! Click the 'Code' button in the bottom-right to view the repository of this project",
