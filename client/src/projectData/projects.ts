@@ -39,6 +39,15 @@ const projects: ProjectData[] = [
         tags: ["Java", "LWJGL", "OOP", "Shaders", "Python", "3D Graphics", "Animation", "XML", "File Formats"],
         key: i++,
     },
+    {
+        title: "16-Bit Computer Emulator",
+        imgPath: "/imgs/projects/EmulatorView.png",
+        desc: "This is a Terminal User Interface for an Emulator of a 16-Bit Computer I've designed. At the moment it includes most functionality, including 16 general purpose registers to use, addition, subtraction, bitwise logic, and 16-Bit RAM. I have planned designs to add ALU flags for conditional jumping, I/O, a stack, and some other parts to make it as cabaple as possible. I also have plans to develop an assembly language compiler, basic operating system, basic utility programs, and a C compiler for it. Additionally, I will eventually build the computer using off-the-shelf logic chips to be able to run all these programs on real hardware. This project is still in very active development, and as such changes will be made often and documentation will be out of date until it is refreshed and updated.",
+        repoURL: "https://github.com/SudoWatson/NOS-Computer",
+        demoURL: projectButtonURLStatus.UNAVAILABLE_NOLIVE,
+        tags: ["C++", "Assembly", "Computer Architecture", "Program Compilers", "Logical Architecture"],
+        key: i++,
+    },
 ];
 
 export default projects;
