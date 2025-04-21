@@ -16,7 +16,16 @@ const port = process.env.PORT;
 
 
 // ---=== ROUTES ===--- \\
+app.get('/localbusinesssurvey', (_: Request, res: Response) => {
+  console.log("Test");
+  res.redirect(303, "https://tally.so/r/wvdvMA");
+})
 
+app.post('/email', (req: Request, res: Response) => {
+  // TODO Handle email
+})
+
+// Needs to be last route for some reason
 if (process.env.NODE_ENV === "development") {
   console.log("Running in DEVELOPMENT mode");
   
@@ -27,7 +36,6 @@ if (process.env.NODE_ENV === "development") {
     target:"http://127.0.0.1:3000",
     changeOrigin: true
   }));
-  
 } else {
   console.log("Running in PRODUCTION mode");
   // If in production, serve build path
@@ -35,9 +43,6 @@ if (process.env.NODE_ENV === "development") {
   app.use('/', express.static(reactPath));
 }
 
-app.post('/email', (req: Request, res: Response) => {
-  // TODO Handle email
-})
 
 // ---===  END   ===--- \\
 
