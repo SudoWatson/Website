@@ -10,6 +10,7 @@
 interface ProjectData {
     title: string,
     imgPath?: string,
+    imgPaths: string[],
     desc: string,
     repoURL: string,
     demoURL: string,

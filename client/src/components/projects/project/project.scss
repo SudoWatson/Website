@@ -12,7 +12,6 @@ $thumbnailZoom: scale(1.025);
 
     cursor: pointer;
 
-    
     @media #{$media-mobile} {
         width: 80%;
         height: 52vw;
@@ -80,10 +79,9 @@ $thumbnailZoom: scale(1.025);
         padding: 0;
     }
 
-    img {
-    aspect-ratio: 700/525;
+    #projectPopupCarousel {
     //grid-column: 1;
-        width: 100%;
+        width: 50%;
         object-fit: cover;
     }
 
@@ -98,8 +96,6 @@ $thumbnailZoom: scale(1.025);
         height: 100%;
 
         div {
-            height: 100%;
-            
             @media #{$media-mobile} {
                 width: 90%;
                 height: fit-content;

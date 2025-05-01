@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { isMobile } from "react-device-detect";
+import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 import "./project.css";
 
 import ProjectButton from "../projectButton/projectButton";
+
+const TypedImageGallery = ImageGallery as unknown as React.ComponentType<any>;
 
 type Props = ProjectData;
 
@@ -34,6 +38,20 @@ export default class project extends Component<Props, State> {
     render() {
         // TODO: Shadow still isn't lining up nicely
         if (this.props.title === "Template") return <></>
+        let carouselImages: ReactImageGalleryItem[] = [
+  {
+    original: "https://picsum.photos/id/1018/1000/600/",
+    thumbnail: "https://picsum.photos/id/1018/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1015/1000/600/",
+    thumbnail: "https://picsum.photos/id/1015/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1019/1000/600/",
+    thumbnail: "https://picsum.photos/id/1019/250/150/",
+  },
+];
         return (
             <>
                 <div id="ProjectThumbnail" onClick={this.onClick}>
@@ -58,11 +76,8 @@ export default class project extends Component<Props, State> {
                             </h4>
 
                             <div id="popupContent" className="row">
-                                <div id="projectPopupImage" className="col-7 no-padding">
-                                    <img
-                                        src={this.props.imgPath}
-                                        alt="Project Thumbnail"
-                                    />
+                                <div id="projectPopupCarousel">
+                                    <TypedImageGallery items={carouselImages} />
                                 </div>
 
                                 <div id="projectPopupContent" className="col-5">
