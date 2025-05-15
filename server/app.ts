@@ -16,6 +16,14 @@ const port = process.env.PORT;
 
 
 // ---=== ROUTES ===--- \\
+app.get('/survey', (_: Request, res: Response) => {
+  console.log("Test");
+  res.redirect(303, "https://tally.so/r/wvdvMA");
+})
+app.get('/local-business-survey', (_: Request, res: Response) => {
+  console.log("Test");
+  res.redirect(303, "https://tally.so/r/wvdvMA");
+})
 app.get('/localbusinesssurvey', (_: Request, res: Response) => {
   console.log("Test");
   res.redirect(303, "https://tally.so/r/wvdvMA");
