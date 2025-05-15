@@ -28,6 +28,14 @@ app.get('/localbusinesssurvey', (_: Request, res: Response) => {
   console.log("Test");
   res.redirect(303, "https://tally.so/r/wvdvMA");
 })
+app.get('/localbusinessurvey', (_: Request, res: Response) => {
+  console.log("Test");
+  res.redirect(303, "https://tally.so/r/wvdvMA");
+})
+app.get('/localbusinesurvey', (_: Request, res: Response) => {
+  console.log("Test");
+  res.redirect(303, "https://tally.so/r/wvdvMA");
+})
 
 app.post('/email', (req: Request, res: Response) => {
   // TODO Handle email
