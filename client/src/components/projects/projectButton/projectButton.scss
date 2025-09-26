@@ -5,22 +5,21 @@
     @media #{$media-mobile} {
         display: none;
     }
-    
+
     a {
         text-decoration: none;
-        
         &.disabled {
             pointer-events: none;
         }
     }
-    
+
     button {
-        width: 75px;
+        width: fit-content;
         height: 35px;
-    
+
         color: #101010;
         font-weight: bold;
-    
+
         display: flex;
         justify-content: space-around;
         align-items: center;
