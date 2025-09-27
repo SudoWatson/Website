@@ -12,7 +12,6 @@ $thumbnailZoom: scale(1.025);
 
     cursor: pointer;
 
-    
     @media #{$media-mobile} {
         width: 80%;
         height: 52vw;
@@ -70,7 +69,7 @@ $thumbnailZoom: scale(1.025);
 
     z-index: 1000;
 
-    
+
     @media #{$media-mobile} {
         width: 70vw;
         height: 70vh;
@@ -80,11 +79,36 @@ $thumbnailZoom: scale(1.025);
         padding: 0;
     }
 
-    img {
-    aspect-ratio: 700/525;
+    #projectPopupCarousel {
     //grid-column: 1;
-        width: 100%;
+        width: 50%;
+        height: 100%;
         object-fit: cover;
+
+        .image-gallery, .image-gallery-content, .image-gallery-swipe, .image-gallery-slides, .image-gallery-slide, .image-gallery-thumbnails, .image-gallery-thumbnails-container, .image-gallery-thumbnail, .image-gallery-thumbnail-inner {
+            height: 100%;
+        }
+        .image-gallery-slide-wrapper {
+            height: 80%;
+        }
+        .image-gallery-thumbnails-wrapper {
+            height: 20%;
+        }
+        .image-gallery-image, .image-gallery-thumbnail-image {
+            max-height: 95%;
+            max-width: 100%;
+            width: unset;
+            position: absolute;
+            top: 50%;
+            left: 50;
+            transform: translate(-50%, -50%);
+            z-index: -1;  // Makes border of thumbnails appear on top of actual thumbnail
+        }
+
+        @media #{$media-mobile} {
+            width: 100%;
+            height: 30%;
+        }
     }
 
     h2 {
@@ -97,25 +121,14 @@ $thumbnailZoom: scale(1.025);
     #popupContent {
         height: 100%;
 
-        div {
-            height: 100%;
-            
-            @media #{$media-mobile} {
-                width: 90%;
-                height: fit-content;
-                padding: 5% 5% 0;
-
-            }
-        }
-        
         @media #{$media-mobile} {
             display: static;
 
             #projectPopupContent {
+                width: 95%;
                 padding: 0;
                 margin: 0;
-                width: auto;
-                height: auto;
+                height: 100%;
                 div {
                     margin: 0;
                 }

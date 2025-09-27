@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { isMobile } from "react-device-detect";
+import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 import "./project.css";
 
 import ProjectButton from "../projectButton/projectButton";
+
+const TypedImageGallery = ImageGallery as unknown as React.ComponentType<any>;
 
 type Props = ProjectData;
 
@@ -34,6 +38,15 @@ export default class project extends Component<Props, State> {
     render() {
         // TODO: Shadow still isn't lining up nicely
         if (this.props.title === "Template") return <></>
+
+        let carouselImages: ReactImageGalleryItem[] = [];
+        for (const imgPath of this.props.imgPaths) {
+            carouselImages.push({
+                original: imgPath,
+                thumbnail: imgPath
+            })
+        }
+
         return (
             <>
                 <div id="ProjectThumbnail" onClick={this.onClick}>
@@ -58,10 +71,11 @@ export default class project extends Component<Props, State> {
                             </h4>
 
                             <div id="popupContent" className="row">
-                                <div id="projectPopupImage" className="col-7 no-padding">
-                                    <img
-                                        src={this.props.imgPath}
-                                        alt="Project Thumbnail"
+                                <div id="projectPopupCarousel">
+                                    <TypedImageGallery items={carouselImages}
+                                        showPlayButton={false}
+                                        showNav={carouselImages.length > 1}
+                                        showThumbnails={carouselImages.length > 1}
                                     />
                                 </div>
 
@@ -82,10 +96,12 @@ export default class project extends Component<Props, State> {
                                         </div>
                                     </div>
                                     <div id="buttons" className="row-inline">
+                                        {/*
                                         <ProjectButton
                                             type={"Demo"}
                                             url={this.props.demoURL || "#"}
                                         />
+                                        */}
                                         <ProjectButton
                                             type={"Code"}
                                             url={this.props.repoURL || "#"}

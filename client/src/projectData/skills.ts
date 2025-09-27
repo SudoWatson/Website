@@ -16,11 +16,6 @@ const skills: SkillData[] = [
         key: i++,
     },
     {
-        name: "C++",
-        imageURL: "/imgs/skills/Cpp-Logo.png",
-        key: i++,
-    },
-    {
         name: "Python",
         imageURL: "/imgs/skills/Python-logo.png",
         key: i++,
@@ -43,11 +38,6 @@ const skills: SkillData[] = [
     {
         name: "Git",
         imageURL: "/imgs/skills/Git-Icon.png",
-        key: i++,
-    },
-    {
-        name: "Blazor",
-        imageURL: "/imgs/skills/Blazor-Logo.png",
         key: i++,
     },
 ];
