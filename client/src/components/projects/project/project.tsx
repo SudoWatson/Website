@@ -74,7 +74,6 @@ export default class project extends Component<Props, State> {
                                 <div id="projectPopupCarousel">
                                     <TypedImageGallery items={carouselImages}
                                         showPlayButton={false}
-                                        showFullscreenButton={false}
                                         showNav={carouselImages.length > 1}
                                         showThumbnails={carouselImages.length > 1}
                                     />
