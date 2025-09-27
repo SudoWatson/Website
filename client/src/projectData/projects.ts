@@ -42,6 +42,19 @@ const projects: ProjectData[] = [
         key: i++,
     },
     {
+        title: "PhotoPolarAlign Modernization",
+        imgPath: "/imgs/projects/ppa.png",
+        imgPaths: [
+            "/imgs/projects/ppa.png",
+            "/imgs/projects/ppa2.png",
+        ],
+        desc: "PhotoPolarAlign is an open-source application to assist Polar Alignment of astrophotography cameras. It was originally developed in 2015 by Themos Tsikas, but has mostly been abandoned since 2018. I've forked the application and began maintaining and modernizing the project, including adding documentation, porting from the dead Python 2 to maintained Python 3, improving system integration, and adding a Command Line Interface so the application can be used in scripts for automations.",
+        repoURL: "https://github.com/SudoWatson/PhotoPolarAlign",
+        demoURL: projectButtonURLStatus.UNAVAILABLE_NOLIVE,
+        tags: ["Python", "TKinter GUIs", "Open Source Development", "Astronomy Science", "CLI Development"],
+        key: i++,
+    },
+    {
         title: "16-Bit Computer Emulator",
         imgPath: "/imgs/projects/EmulatorView.png",
         imgPaths: [
