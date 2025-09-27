@@ -82,7 +82,28 @@ $thumbnailZoom: scale(1.025);
     #projectPopupCarousel {
     //grid-column: 1;
         width: 50%;
+        height: 100%;
         object-fit: cover;
+
+        .image-gallery, .image-gallery-content, .image-gallery-swipe, .image-gallery-slides, .image-gallery-slide, .image-gallery-thumbnails, .image-gallery-thumbnails-container, .image-gallery-thumbnail, .image-gallery-thumbnail-inner {
+            height: 100%;
+        }
+        .image-gallery-slide-wrapper {
+            height: 80%;
+        }
+        .image-gallery-thumbnails-wrapper {
+            height: 20%;
+        }
+        .image-gallery-image, .image-gallery-thumbnail-image {
+            max-height: 100%;
+            max-width: 100%;
+            width: unset;
+            position: absolute;
+            top: 50%;
+            left: 50;
+            transform: translate(-50%, -50%);
+            z-index: -1;  // Makes border of thumbnails appear on top of actual thumbnail
+        }
     }
 
     h2 {
